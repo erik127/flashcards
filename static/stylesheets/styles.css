@@ -1,0 +1,44 @@
+h1 {
+  
+}
+
+h2 {
+  
+}
+
+h3 {
+  font-size: 1em;
+  margin: 1em 0 0.5em 0;
+}
+
+.width-2em {
+  width: 2em; 
+}
+
+.width-4em {
+  width: 4em; 
+}
+
+.width-30 {
+  width: 30%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.floatright {
+  float: right;
+}
