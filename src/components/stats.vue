@@ -14,11 +14,17 @@
 <script>
 export default {
   name: 'stats',
-  props: ['deck0', 'deck1', 'deck2', 'deck3'],
+  // props: ['deck0', 'deck1', 'deck2', 'deck3'],
   data () {
     return {
 
     }
+  },
+  computed: {
+    deck0: () => this.$store.state.decks[0].length,
+    deck1: () => this.$store.state.decks[1].length,
+    deck2: () => this.$store.state.decks[2].length,
+    deck3: () => this.$store.state.decks[3].length
   }
 }
 </script>

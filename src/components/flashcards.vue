@@ -37,13 +37,21 @@
 <script>
 export default {
   name: 'flashcards',
-  props: ['card', 'to', 'from'],
+  props: ['card'],
   data () {
     return {
       status: 'question'
     }
   },
   computed: {
+    to: function () {
+      console.log('in flascard to')
+      return this.$store.state.settings.to
+    },
+    from: function () {
+      console.log('in flashcard from')
+      return this.$store.state.settings.from
+    },
     question: function () {
       if (this.from === 'en') {
         return this.card.en
@@ -73,11 +81,11 @@ export default {
     },
     wrong: function () {
       this.flip()
-      this.$emit('wrong')
+      this.$emit('answer', 'wrong')
     },
     right: function () {
       this.flip()
-      this.$emit('right')
+      this.$emit('answer', 'right')
     }
   }
 }
