@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if='loaded'>
     <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
       <span>Flashcards</span>
@@ -8,8 +8,8 @@
       <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel'></settings>
       <info v-if='view === "info"'></info>
       <help v-if='view === "help"'></help>
-      <flashcards v-if='loaded' :card='card' @answer='answer'></flashcards>
-      <stats v-if='loaded'></stats>
+      <flashcards @answer='answer'></flashcards>
+      <stats></stats>
     </main>
   </div>
 </template>
@@ -21,7 +21,6 @@ import Info from './components/info'
 import Help from './components/help'
 import Flashcards from './components/flashcards'
 import Stats from './components/stats'
-import cardselector from './components/cardselector'
 
 export default {
   name: 'app',
@@ -35,26 +34,39 @@ export default {
   },
   data () {
     return {
-      view: 'home',
-      card: {}
+      // view: 'home',
+      // card: {}
     }
   },
-  created: async function () {
-    await this.$store.dispatch('INIT_START')
-    this.newCard()
+  created: function () {
+    this.$store.dispatch('INIT_START')
+    // this.newCard()
   },
   computed: {
     loaded: function () {
-      if (this.$store === undefined) {
+      // if (this.$store === undefined) {
+      //   return false
+      // } else if (!this.$store.state.loaded) {
+      //   return false
+      // } else {
+      //   this.newCard()
+      //   console.log(this.$store.state.decks)
+      //   return true
+      // }
+      console.log(this.$store.state.loaded)
+      if (!this.$store.state.loaded) {
         return false
       } else {
-        return this.$store.state.loaded
+        // this.newCard()
+        return true
       }
+    },
+    view: function () {
+      return this.$store.state.view
+    },
+    settings: function () {
+      return this.$store.state.settings
     }
-    // settings: () => {
-    //   console.log(this)
-    //   return this.$store.state.settings
-    // }
     // deck0: () => this.$store.state.decks[0].length,
     // deck1: () => this.$store.state.decks[1].length,
     // deck2: () => this.$store.state.decks[2].length,
@@ -62,13 +74,6 @@ export default {
   },
   methods: {
     newCard: function () {
-      console.log('new card')
-      let newRound = cardselector(this.$store.state.decks, this.$store.state.counter)
-      if (newRound !== 'end') {
-        this.card = newRound.card
-        this.currentDeck = newRound.deck
-      }
-      console.log(this.card)
     },
     changeView: function (view) {
       if (this.$store.state.view === view && view === 'settings') {
@@ -84,7 +89,7 @@ export default {
       this.$store.dispatch('UPDATE_VIEW', 'home')
       this.$store.dispatch('UPDATE_SETTINGS', settings)
     },
-    cancel: async function () {
+    cancel: function () {
       this.$store.dispatch('UPDATE_VIEW', 'home')
       // console.log(this.settings)
       // let dbSettings = await db.get('settings')
@@ -93,38 +98,36 @@ export default {
       // this.view = 'home'
     },
     right: function () {
-      if (this.card.lastTry === 'right') {
+      if (this.$store.state.card.lastTry === 'right') {
         console.log('right second time in a row')
-        this.decks[3].push(this.card)
+        this.decks[3].push(this.$store.state.card)
         this.update([{id: 'deck3', cards: this.$store.state.decks[3]}])
       } else {
         console.log('right first time in a row')
-        this.card.lastTry = 'right'
-        this.decks[2].push(this.card)
+        this.$store.state.card.lastTry = 'right'
+        this.decks[2].push(this.$store.state.card)
         this.update([{id: 'deck2', cards: this.$store.state.decks[2]}])
       }
     },
     wrong: function () {
-      this.card.lastTry = 'wrong'
-      this.decks[1].push(this.card)
+      this.$store.state.card.lastTry = 'wrong'
+      this.decks[1].push(this.$store.state.card)
       this.update([{id: 'deck1', cards: this.$store.state.decks[1]}])
     },
     answer: function (answer) {
       let newDeck
       if (answer === 'wrong') {
-        this.card.lastTry = 'wrong'
+        this.$store.state.card.lastTry = 'wrong'
         newDeck = 1
       } else {
-        this.card.lastTry = 'right'
-        if (this.card.lastTry === 'wrong') {
-          newDeck = 2
-        } else {
+        if (this.$store.state.card.lastTry === 'right') {
           newDeck = 3
+        } else {
+          newDeck = 2
         }
+        this.$store.state.card.lastTry = 'right'
       }
-      this.$store.dispatch('UPDATE_DECKS', {from: this.currentDeck, to: newDeck, card: this.card})
-      this.$store.dispatch('UPDATE_COUNTER')
-      this.newCard()
+      this.$store.dispatch('UPDATE_DECKS', {from: this.$store.state.currentDeck, to: newDeck, card: this.$store.state.card})
     // },
     // update: async function (decks) {
     //   let i = this.currentDeck

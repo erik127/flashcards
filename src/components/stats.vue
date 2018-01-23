@@ -21,10 +21,18 @@ export default {
     }
   },
   computed: {
-    deck0: () => this.$store.state.decks[0].length,
-    deck1: () => this.$store.state.decks[1].length,
-    deck2: () => this.$store.state.decks[2].length,
-    deck3: () => this.$store.state.decks[3].length
+    deck0: function () {
+      return this.$store.state.decks[0].length
+    },
+    deck1: function () {
+      return this.$store.state.decks[1].length
+    },
+    deck2: function () {
+      return this.$store.state.decks[2].length
+    },
+    deck3: function () {
+      return this.$store.state.decks[3].length
+    }
   }
 }
 </script>

@@ -37,7 +37,7 @@
 <script>
 export default {
   name: 'flashcards',
-  props: ['card'],
+  // props: ['card'],
   data () {
     return {
       status: 'question'
@@ -45,12 +45,13 @@ export default {
   },
   computed: {
     to: function () {
-      console.log('in flascard to')
       return this.$store.state.settings.to
     },
     from: function () {
-      console.log('in flashcard from')
       return this.$store.state.settings.from
+    },
+    card: function () {
+      return this.$store.state.card
     },
     question: function () {
       if (this.from === 'en') {
