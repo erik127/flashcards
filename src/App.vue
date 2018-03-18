@@ -21,6 +21,7 @@ import Info from './components/info'
 import Help from './components/help'
 import Flashcards from './components/flashcards'
 import Stats from './components/stats'
+import { mapState } from 'vuex'
 
 export default {
   name: 'app',
@@ -42,36 +43,10 @@ export default {
     this.$store.dispatch('INIT_START')
     // this.newCard()
   },
-  computed: {
-    loaded: function () {
-      // if (this.$store === undefined) {
-      //   return false
-      // } else if (!this.$store.state.loaded) {
-      //   return false
-      // } else {
-      //   this.newCard()
-      //   console.log(this.$store.state.decks)
-      //   return true
-      // }
-      console.log(this.$store.state.loaded)
-      if (!this.$store.state.loaded) {
-        return false
-      } else {
-        // this.newCard()
-        return true
-      }
-    },
-    view: function () {
-      return this.$store.state.view
-    },
-    settings: function () {
-      return this.$store.state.settings
-    }
-    // deck0: () => this.$store.state.decks[0].length,
-    // deck1: () => this.$store.state.decks[1].length,
-    // deck2: () => this.$store.state.decks[2].length,
-    // deck3: () => this.$store.state.decks[3].length
-  },
+  computed: mapState([
+    'loaded',
+    'view',
+    'settings']),
   methods: {
     newCard: function () {
     },

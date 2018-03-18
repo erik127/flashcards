@@ -9,6 +9,14 @@ Vue.use(Vuex)
 
 const db = new PouchDB('flashcardsDB')
 
+
+// Testing to see how to get a parent and children in one query
+// const testDB = new PouchDB('http://localhost:5984/playground', {skipSetup: true})
+
+// testDB.query('test', {startkey: ['1', 0], endkey: ['1', '\uffff'], include_docs: true}).then(function (res) {
+//   console.log(res)
+// })
+
 const store = new Vuex.Store({
   state: {
     decks: [ [], [], [], [] ],
@@ -37,6 +45,7 @@ const store = new Vuex.Store({
           data.rows[4].doc.cards
         ]
         let settings = data.rows[5].doc.settings
+        console.log(settings)
         commit('SET_COUNTER', {counter: counter})
         commit('SET_DECKS', {decks: decks})
         commit('SET_SETTINGS', {settings: settings})
@@ -54,8 +63,9 @@ const store = new Vuex.Store({
         if (JSON.stringify(dbSettings.settings) === JSON.stringify(settings)) {
           console.log(true)
         } else {
-          console.log(JSON.stringify(dbSettings.settings), JSON.stringify(parsedSettings))
           console.log(false)
+          dbSettings.settings = parsedSettings
+          db.put(dbSettings)
           store.dispatch('SHUFFLE', settings)
         }
       } catch (error) {
@@ -64,13 +74,11 @@ const store = new Vuex.Store({
     },
     GET_CARD: function ({commit}) {
       console.log('new card')
-      console.log(store.state.decks, store.state.counter)
       let newRound = cardselector(store.state.decks, store.state.counter)
       if (newRound !== 'end') {
         commit('SET_CARD', {card: newRound.card})
         commit('SET_CURRENTDECK', {currentDeck: newRound.deck})
       }
-      console.log(store.state.card)
     },
     UPDATE_DECKS: async function ({commit}, move) {
       let decks = store.state.decks
@@ -136,6 +144,7 @@ const store = new Vuex.Store({
         {_id: 'settings', settings: store.state.settings}
       ]
       try {
+        console.log(data)
         await db.bulkDocs(data)
       } catch (error) {
         console.log(error)
@@ -178,6 +187,10 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    deck0: state => state.decks[0].length,
+    deck1: state => state.decks[1].length,
+    deck2: state => state.decks[2].length,
+    deck3: state => state.decks[3].length
   },
   modules: {
   }

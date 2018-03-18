@@ -74,19 +74,15 @@ export default {
   },
   methods: {
     flip: function () {
-      if (this.status === 'question') {
-        this.status = 'answer'
-      } else {
-        this.status = 'question'
-      }
+      this.status = this.status === 'question' ? 'answer' : 'question'
     },
     wrong: function () {
-      this.flip()
       this.$emit('answer', 'wrong')
+      this.flip()
     },
     right: function () {
-      this.flip()
       this.$emit('answer', 'right')
+      this.flip()
     }
   }
 }

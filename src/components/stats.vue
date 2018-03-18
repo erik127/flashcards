@@ -12,27 +12,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'stats',
-  // props: ['deck0', 'deck1', 'deck2', 'deck3'],
   data () {
     return {
 
     }
   },
   computed: {
-    deck0: function () {
-      return this.$store.state.decks[0].length
-    },
-    deck1: function () {
-      return this.$store.state.decks[1].length
-    },
-    deck2: function () {
-      return this.$store.state.decks[2].length
-    },
-    deck3: function () {
-      return this.$store.state.decks[3].length
-    }
+    ...mapGetters([
+      'deck0',
+      'deck1',
+      'deck2',
+      'deck3'
+    ])
   }
 }
 </script>
