@@ -9,14 +9,6 @@ Vue.use(Vuex)
 
 const db = new PouchDB('flashcardsDB')
 
-
-// Testing to see how to get a parent and children in one query
-// const testDB = new PouchDB('http://localhost:5984/playground', {skipSetup: true})
-
-// testDB.query('test', {startkey: ['1', 0], endkey: ['1', '\uffff'], include_docs: true}).then(function (res) {
-//   console.log(res)
-// })
-
 const store = new Vuex.Store({
   state: {
     decks: [ [], [], [], [] ],
@@ -32,20 +24,18 @@ const store = new Vuex.Store({
   },
   actions: {
     INIT_START: async function ({commit}) {
-      let data = await db.allDocs({include_docs: true})
-      if (data.rows.length === 0) {
-        store.dispatch('SHUFFLE')
+      let status = await db.allDocs({include_docs: true})
+      if (status.rows.length === 0) {
+        store.dispatch('RESTART')
       } else {
-        let counter = data.rows[0].doc.counter
-        console.log(counter)
+        let counter = status.rows[0].doc.data
         let decks = [
-          data.rows[1].doc.cards,
-          data.rows[2].doc.cards,
-          data.rows[3].doc.cards,
-          data.rows[4].doc.cards
+          status.rows[1].doc.data,
+          status.rows[2].doc.data,
+          status.rows[3].doc.data,
+          status.rows[4].doc.data
         ]
-        let settings = data.rows[5].doc.settings
-        console.log(settings)
+        let settings = status.rows[5].doc.data
         commit('SET_COUNTER', {counter: counter})
         commit('SET_DECKS', {decks: decks})
         commit('SET_SETTINGS', {settings: settings})
@@ -60,20 +50,16 @@ const store = new Vuex.Store({
       let parsedSettings = JSON.parse(JSON.stringify(settings))
       try {
         let dbSettings = await db.get('settings')
-        if (JSON.stringify(dbSettings.settings) === JSON.stringify(settings)) {
-          console.log(true)
-        } else {
-          console.log(false)
-          dbSettings.settings = parsedSettings
+        if (JSON.stringify(dbSettings.data) !== JSON.stringify(settings)) {
+          dbSettings.data = parsedSettings
           db.put(dbSettings)
-          store.dispatch('SHUFFLE', settings)
+          store.dispatch('RESTART', settings)
         }
       } catch (error) {
         console.log(error)
       }
     },
     GET_CARD: function ({commit}) {
-      console.log('new card')
       let newRound = cardselector(store.state.decks, store.state.counter)
       if (newRound !== 'end') {
         commit('SET_CARD', {card: newRound.card})
@@ -91,7 +77,7 @@ const store = new Vuex.Store({
       try {
         for (const deck of newDecks) {
           let dbDeck = await db.get(deck.id)
-          dbDeck.cards = deck.cards
+          dbDeck.data = deck.cards
           await db.put(dbDeck)
         }
       } catch (error) {
@@ -105,10 +91,7 @@ const store = new Vuex.Store({
       counter++
       try {
         let dbCounter = await db.get('counter')
-        console.log(dbCounter.counter)
-        console.log(counter)
-        dbCounter.counter = counter
-        console.log(dbCounter)
+        dbCounter.data = counter
         await db.put(dbCounter)
       } catch (error) {
         console.log(error)
@@ -116,39 +99,53 @@ const store = new Vuex.Store({
       commit('SET_COUNTER', {counter: counter})
       store.dispatch('GET_CARD')
     },
-    SHUFFLE: async function ({commit}, passedSettings) {
+    RESTART: async function ({commit}, passedSettings) {
+      console.log('RESTART')
       let decks = [ [], [], [], [] ]
       let counter = 0
-      let settings
-      if (!passedSettings) {
-        settings = store.state.settings
-      } else {
-        settings = passedSettings
-      }
+      let settings = passedSettings || store.state.settings
+
+      // if (!passedSettings) {
+      //   settings = store.state.settings
+      // } else {
+      //   settings = passedSettings
+      // }
+
       if (settings.categories.indexOf('greetings') > -1) {
         for (const card of Greetings) {
           decks[0].push(card)
         }
       }
+
       if (settings.categories.indexOf('present-regular') > -1) {
         for (const card of PresentRegular) {
           decks[0].push(card)
         }
       }
-      let data = [
-        {_id: 'counter', counter: counter},
-        {_id: 'deck0', cards: decks[0]},
-        {_id: 'deck1', cards: decks[1]},
-        {_id: 'deck2', cards: decks[2]},
-        {_id: 'deck3', cards: decks[3]},
-        {_id: 'settings', settings: store.state.settings}
+
+      let status = [
+        {_id: 'counter', data: counter},
+        {_id: 'deck0', data: decks[0]},
+        {_id: 'deck1', data: decks[1]},
+        {_id: 'deck2', data: decks[2]},
+        {_id: 'deck3', data: decks[3]},
+        {_id: 'settings', data: settings}
       ]
-      try {
-        console.log(data)
-        await db.bulkDocs(data)
-      } catch (error) {
-        console.log(error)
+
+      for (let i = 0; i < status.length; i++) {
+        try {
+          let item = await db.get(status[i]._id)
+          item.data = status[i].data
+          await db.put(item)
+        } catch (error) {
+          if (error.status === 404) {
+            await db.put(status[i])
+          } else {
+            console.log(error)
+          }
+        }
       }
+
       commit('SET_COUNTER', {counter: counter})
       commit('SET_DECKS', {decks: decks})
       commit('SET_SETTINGS', {settings: settings})
@@ -158,31 +155,24 @@ const store = new Vuex.Store({
   },
   mutations: {
     SET_COUNTER: (state, {counter}) => {
-      console.log('counter committed')
       Vue.set(state, 'counter', counter)
     },
     SET_DECKS: (state, {decks}) => {
-      console.log('decks committed')
       Vue.set(state, 'decks', decks)
     },
     SET_CARD: (state, {card}) => {
-      console.log('card committed')
       Vue.set(state, 'card', card)
     },
     SET_CURRENTDECK: (state, {currentDeck}) => {
-      console.log('currentDeck committed')
       Vue.set(state, 'currentDeck', currentDeck)
     },
     SET_SETTINGS: (state, {settings}) => {
-      console.log('settings committed')
       Vue.set(state, 'settings', settings)
     },
     UPDATE_VIEW: (state, {view}) => {
-      console.log('view committed')
       Vue.set(state, 'view', view)
     },
     LOADED: (state, {loaded}) => {
-      console.log('loaded committed')
       Vue.set(state, 'loaded', loaded)
     }
   },

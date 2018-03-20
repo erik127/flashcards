@@ -1,4 +1,4 @@
-<template>
+q<template>
   <div id="app" v-if='loaded'>
     <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
