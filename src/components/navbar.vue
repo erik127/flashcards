@@ -54,7 +54,10 @@ export default {
 <style scoped>
 div {
   width: 8em;
+  height: 3em;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 div svg {
