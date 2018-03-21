@@ -5,7 +5,7 @@
         <p class='question'>{{question}}</p>
         <div class='button-box'>
           <svg viewBox='0 0 20 20' class='flip' @click='flip'>
-            <title>arrow-right</title>
+            <title>flip</title>
             <circle cx='10' cy='10' r='9'/>
             <path d='m3 10 h13'/>
             <path d='m12 5 5 5 -5 5'/>
@@ -22,13 +22,13 @@
         <p class='answer'>{{answer}}</p>
         <div class='button-box'>
           <svg viewBox='0 0 20 20' class='wrong' @click='wrong'>
-            <title>cross</title>
+            <title>wrong</title>
             <circle cx='10' cy='10' r='9'/>
             <path d='m5 5 10 10'/>
             <path d='m5 15 10 -10'/>
           </svg>
           <svg viewBox='0 0 20 20' class='right' @click='right'>
-            <title>checkmark</title>
+            <title>right</title>
             <circle cx='10' cy='10' r='9'/>
             <path d='M 4,11 9,16 15,5'/>
           </svg>
@@ -141,7 +141,10 @@ export default {
   left: 0;
   border-radius: 10px;
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+}
+
+.front {
+  z-index: 2;
 }
 
 .back {
@@ -193,6 +196,12 @@ export default {
 
 .right circle {
   fill: #11d42e;
+}
+
+.flip:hover,
+.right:hover,
+.wrong:hover {
+  cursor: pointer;
 }
 
 .back-button {
