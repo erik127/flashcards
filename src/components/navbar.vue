@@ -69,8 +69,8 @@ div circle {
 }
 
 div g, div path {
-  fill: #bbb;
-  stroke: #bbb;
+  fill: #999;
+  stroke: #999;
   stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;

@@ -1,4 +1,4 @@
-q<template>
+<template>
   <div id="app" v-if='loaded'>
     <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
@@ -8,6 +8,7 @@ q<template>
       <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel'></settings>
       <info v-if='view === "info"'></info>
       <help v-if='view === "help"'></help>
+      
       <flashcards @answer='answer'></flashcards>
       <stats></stats>
     </main>
@@ -35,6 +36,8 @@ export default {
   },
   data () {
     return {
+      // transition: 'fromDeck1',
+      // visible: false,
       // view: 'home',
       // card: {}
     }
@@ -72,37 +75,43 @@ export default {
       // console.log(this.settings)
       // this.view = 'home'
     },
-    right: function () {
-      if (this.$store.state.card.lastTry === 'right') {
-        console.log('right second time in a row')
-        this.decks[3].push(this.$store.state.card)
-        this.update([{id: 'deck3', cards: this.$store.state.decks[3]}])
-      } else {
-        console.log('right first time in a row')
-        this.$store.state.card.lastTry = 'right'
-        this.decks[2].push(this.$store.state.card)
-        this.update([{id: 'deck2', cards: this.$store.state.decks[2]}])
-      }
-    },
-    wrong: function () {
-      this.$store.state.card.lastTry = 'wrong'
-      this.decks[1].push(this.$store.state.card)
-      this.update([{id: 'deck1', cards: this.$store.state.decks[1]}])
-    },
+    // right: function () {
+    //   if (this.$store.state.card.lastTry === 'right') {
+    //     console.log('right second time in a row')
+    //     this.decks[3].push(this.$store.state.card)
+    //     this.update([{id: 'deck3', cards: this.$store.state.decks[3]}])
+    //   } else {
+    //     console.log('right first time in a row')
+    //     this.$store.state.card.lastTry = 'right'
+    //     this.decks[2].push(this.$store.state.card)
+    //     this.update([{id: 'deck2', cards: this.$store.state.decks[2]}])
+    //   }
+    // },
+    // wrong: function () {
+    //   console.log('wrong method')
+    //   this.$store.state.card.lastTry = 'wrong'
+    //   this.decks[1].push(this.$store.state.card)
+    //   this.update([{id: 'deck1', cards: this.$store.state.decks[1]}])
+    // },
     answer: function (answer) {
+      let card = this.$store.state.card
       let newDeck
       if (answer === 'wrong') {
-        this.$store.state.card.lastTry = 'wrong'
+        card.lastTry = 'wrong'
+        // this.transition = 'toDeck1'
         newDeck = 1
       } else {
-        if (this.$store.state.card.lastTry === 'right') {
+        if (card.lastTry === 'right') {
+          // this.transition = 'toDeck3'
           newDeck = 3
         } else {
+          // this.transition = 'toDeck2'
           newDeck = 2
         }
-        this.$store.state.card.lastTry = 'right'
+        card.lastTry = 'right'
       }
-      this.$store.dispatch('UPDATE_DECKS', {from: this.$store.state.currentDeck, to: newDeck, card: this.$store.state.card})
+      // this.visible = false
+      this.$store.dispatch('UPDATE_DECKS', {from: this.$store.state.currentDeck, to: newDeck, card: card})
     // },
     // update: async function (decks) {
     //   let i = this.currentDeck
@@ -148,57 +157,21 @@ body {
   color: #2c3e50;
 }
 
-
 header {
   margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
+  height: 2em;
   text-align: center;
 }
 
 header span {
   display: block;
   position: relative;
-  font-size: 20px;
+  font-size: 1em;
   line-height: 1;
   letter-spacing: .02em;
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
-}
-
-nav {
-  width: 8em;
-  margin: 0 auto;
-}
-
-nav svg {
-  width: 2em;
-}
-
-nav circle {
-  fill: #ddd;
-}
-
-nav g, nav path {
-  fill: #bbb;
-  stroke: #bbb;
-  stroke-width: 2px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.no-fill, .active .no-fill {
-  fill:none;
-}
-
-.active circle {
-  fill: #666;
-}
-
-.active g, .active path {
-  stroke: #fff;
-  fill: #fff;
 }
 
 </style>

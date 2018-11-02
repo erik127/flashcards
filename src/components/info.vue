@@ -7,9 +7,11 @@
     <p>If it were a 'real' app, I would sync the stats back to a back end server whenever you're online. You can then login from any device and continue where you were.</p>
 
     <p>Credits:</p>
-    pouchdb
-    vuejs
-    icomoon
+    <ul>
+      <li>pouchdb</li>
+      <li>vuejs</li>
+    </ul>
+
 
   </div>
 </template>
