@@ -64,9 +64,14 @@ const store = new Vuex.Store({
     },
     GET_CARD: function ({commit}) {
       let newRound = cardselector(store.state.decks, store.state.counter)
-      if (newRound !== 'end') {
+      if (newRound === 'end') {
+        if (confirm('congrationlations, you mastered it! Do you want to reshuffle the cards?')) {
+          store.dispatch('RESTART')
+        } else {
+          alert('OK, bye, chao, doei')
+        }
+      } else {
         let transitionIn = 'fromDeck' + newRound.deck
-        console.log('in', transitionIn)
         commit('SET_CARD', {card: newRound.card})
         commit('SET_CURRENTDECK', {currentDeck: newRound.deck})
         commit('SET_TRANSITION_IN', {transitionIn: transitionIn})
@@ -79,7 +84,6 @@ const store = new Vuex.Store({
       let to = decks[move.to]
       let i = from.indexOf(move.card)
       let transitionOut = 'toDeck' + move.to
-      console.log('out', transitionOut)
       from.splice(i, 1)
       to.push(move.card)
       let newDecks = [{id: 'deck' + move.from, cards: from}, {id: 'deck' + move.to, cards: to}]
@@ -92,12 +96,18 @@ const store = new Vuex.Store({
       } catch (error) {
         console.log(error)
       }
-      commit('SET_TRANSITION_OUT', {transitionOut: transitionOut})
-      setTimeout(function () {
-        commit('SET_DECKS', {decks: decks})
-        commit('SET_SHOWCARD', {showcard: false})
-        store.dispatch('UPDATE_COUNTER')
-      }, 100)
+
+      // made UPDATE_TRANSITION_OUT an action that promises the commit. Otherwise the transition in
+      // flashcards.vue doesn't pick up the right direction.
+      await store.dispatch('UPDATE_TRANSITION_OUT', transitionOut)
+      commit('SET_DECKS', {decks: decks})
+      commit('SET_SHOWCARD', {showcard: false})
+      store.dispatch('UPDATE_COUNTER')
+    },
+    UPDATE_TRANSITION_OUT: ({commit}, transitionOut) => {
+      return new Promise((resolve, reject) => {
+        resolve(commit('SET_TRANSITION_OUT', {transitionOut: transitionOut}))
+      })
     },
     UPDATE_COUNTER: async function ({commit}) {
       let counter = store.state.counter
@@ -110,28 +120,23 @@ const store = new Vuex.Store({
         console.log(error)
       }
       commit('SET_COUNTER', {counter: counter})
-      window.setTimeout(function () { store.dispatch('GET_CARD') }, 200)
+      window.setTimeout(function () { store.dispatch('GET_CARD') }, 600)
     },
     RESTART: async function ({commit}, passedSettings) {
-      console.log('RESTART')
       let decks = [ [], [], [], [] ]
       let counter = 0
       let settings = passedSettings || store.state.settings
 
-      // if (!passedSettings) {
-      //   settings = store.state.settings
-      // } else {
-      //   settings = passedSettings
-      // }
-
       if (settings.categories.indexOf('greetings') > -1) {
-        for (const card of Greetings) {
+        let clonedGreetings = JSON.parse(JSON.stringify(Greetings))
+        for (const card of clonedGreetings) {
           decks[0].push(card)
         }
       }
 
       if (settings.categories.indexOf('present-regular') > -1) {
-        for (const card of PresentRegular) {
+        let clonedPresentRegular = JSON.parse(JSON.stringify(PresentRegular))
+        for (const card of clonedPresentRegular) {
           decks[0].push(card)
         }
       }
@@ -190,11 +195,9 @@ const store = new Vuex.Store({
     },
     SET_TRANSITION_OUT: (state, {transitionOut}) => {
       Vue.set(state, 'transitionOut', transitionOut)
-      console.log('commit transition out', transitionOut)
     },
     SET_SHOWCARD: (state, {showcard}) => {
       Vue.set(state, 'showcard', showcard)
-      console.log('commit showcard', showcard)
     },
     LOADED: (state, {loaded}) => {
       Vue.set(state, 'loaded', loaded)

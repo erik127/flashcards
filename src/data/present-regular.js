@@ -1,4 +1,4 @@
-let presentRegular = [
+const presentRegular = [
   {
     en: 'I dance',
     es: '(Yo) bailo',

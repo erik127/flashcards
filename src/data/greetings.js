@@ -1,4 +1,4 @@
-let greetings = [
+const greetings = [
   {
     en: 'Hello, Hi',
     es: 'Hola',

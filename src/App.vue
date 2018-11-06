@@ -36,15 +36,10 @@ export default {
   },
   data () {
     return {
-      // transition: 'fromDeck1',
-      // visible: false,
-      // view: 'home',
-      // card: {}
     }
   },
   created: function () {
     this.$store.dispatch('INIT_START')
-    // this.newCard()
   },
   computed: mapState([
     'loaded',
@@ -69,77 +64,22 @@ export default {
     },
     cancel: function () {
       this.$store.dispatch('UPDATE_VIEW', 'home')
-      // console.log(this.settings)
-      // let dbSettings = await db.get('settings')
-      // this.settings = dbSettings.settings
-      // console.log(this.settings)
-      // this.view = 'home'
     },
-    // right: function () {
-    //   if (this.$store.state.card.lastTry === 'right') {
-    //     console.log('right second time in a row')
-    //     this.decks[3].push(this.$store.state.card)
-    //     this.update([{id: 'deck3', cards: this.$store.state.decks[3]}])
-    //   } else {
-    //     console.log('right first time in a row')
-    //     this.$store.state.card.lastTry = 'right'
-    //     this.decks[2].push(this.$store.state.card)
-    //     this.update([{id: 'deck2', cards: this.$store.state.decks[2]}])
-    //   }
-    // },
-    // wrong: function () {
-    //   console.log('wrong method')
-    //   this.$store.state.card.lastTry = 'wrong'
-    //   this.decks[1].push(this.$store.state.card)
-    //   this.update([{id: 'deck1', cards: this.$store.state.decks[1]}])
-    // },
     answer: function (answer) {
       let card = this.$store.state.card
       let newDeck
       if (answer === 'wrong') {
         card.lastTry = 'wrong'
-        // this.transition = 'toDeck1'
         newDeck = 1
       } else {
         if (card.lastTry === 'right') {
-          // this.transition = 'toDeck3'
           newDeck = 3
         } else {
-          // this.transition = 'toDeck2'
           newDeck = 2
         }
         card.lastTry = 'right'
       }
-      // this.visible = false
       this.$store.dispatch('UPDATE_DECKS', {from: this.$store.state.currentDeck, to: newDeck, card: card})
-    // },
-    // update: async function (decks) {
-    //   let i = this.currentDeck
-    //   console.log(i)
-    //   this.$store.state.decks[i].splice(this.decks[i].indexOf(this.card), 1)
-    //   decks.push({id: 'deck' + i, cards: this.decks[i]})
-    //   console.log(decks)
-    //   try {
-    //     for (const deck of decks) {
-    //       let dbDeck = await db.get(deck.id)
-    //       dbDeck.cards = deck.cards
-    //       await db.put(dbDeck)
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    //   this.counter++
-    //   this.card.tries++
-
-    //   try {
-    //     let dbCounter = await db.get('counter')
-    //     dbCounter.counter = this.counter
-    //     await db.put(dbCounter)
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-
-    //   this.newCard()
     }
   }
 }

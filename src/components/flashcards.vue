@@ -103,13 +103,11 @@ export default {
     },
     wrong: function () {
       this.$emit('answer', 'wrong')
-      let that = this
-      window.setTimeout(function () { that.flip() }, 100)
+      this.flip()
     },
     right: function () {
       this.$emit('answer', 'right')
-      let that = this
-      window.setTimeout(function () { that.flip() }, 100)
+      this.flip()
     }
   }
 }
@@ -155,7 +153,7 @@ export default {
   top: 0;
   left: 0;
   border-radius: 10px;
-  box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow:  0 0 1px 0 rgba(0,0,0,0.5), 0 1px 10px 0 rgba(0,0,0,0.15);
 }
 
 .front {
@@ -304,27 +302,27 @@ export default {
 }
 
 .fromDeck0 {
-  animation: fromDeck0 .3s ease-out;
+  animation: fromDeck0 .4s ease-out;
 }
 
 .fromDeck1 {
-  animation: fromDeck1 .3s ease-in-out;
+  animation: fromDeck1 .4s ease-in-out;
 }
 
 .toDeck1 {
-  animation: toDeck1 .3s ease-in-out;
+  animation: toDeck1 .4s ease-in-out;
 }
 
 .fromDeck2 {
-  animation: fromDeck2 .3s ease-in-out;
+  animation: fromDeck2 .4s ease-in-out;
 }
 
 .toDeck2 {
-  animation: toDeck2 .3s ease-in-out;
+  animation: toDeck2 .4s ease-in-out;
 }
 
 .toDeck3 {
-  animation: toDeck3 .3s ease-in-out;
+  animation: toDeck3 .4s ease-in-out;
 }
 
 </style>
