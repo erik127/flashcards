@@ -11,6 +11,7 @@ const db = new PouchDB('flashcardsDB')
 
 const store = new Vuex.Store({
   state: {
+    view: 'home',
     decks: [ [], [], [], [] ],
     counter: 0,
     settings: {
@@ -169,6 +170,7 @@ const store = new Vuex.Store({
       commit('SET_SETTINGS', {settings: settings})
       commit('LOADED', {loaded: true})
       store.dispatch('GET_CARD')
+      commit('UPDATE_VIEW', {view: 'home'})
     }
   },
   mutations: {

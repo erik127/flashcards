@@ -2,15 +2,15 @@
   <div id="app" v-if='loaded'>
     <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
-      <span>Flashcards</span>
+      <h1>Flashcards</h1>
     </header>
     <main>
-      <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel'></settings>
+      <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel' @restart='restart'></settings>
       <info v-if='view === "info"'></info>
       <help v-if='view === "help"'></help>
       
-      <flashcards @answer='answer'></flashcards>
-      <stats></stats>
+      <flashcards @answer='answer' v-if='view === "home"'></flashcards>
+      <stats v-if='view === "home"'></stats>
     </main>
   </div>
 </template>
@@ -65,6 +65,11 @@ export default {
     cancel: function () {
       this.$store.dispatch('UPDATE_VIEW', 'home')
     },
+    restart: function () {
+      if (confirm('are you sure to restart? You will lose your history.')) {
+        this.$store.dispatch('RESTART')
+      }
+    },
     answer: function (answer) {
       let card = this.$store.state.card
       let newDeck
@@ -95,6 +100,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background-color: rgba(255, 255, 255, 0.3)
 }
 
 header {
