@@ -43,3 +43,10 @@ h3 {
   float: right;
 }
 
+.ie-info {
+  display: none;
+}
+
+.ie .ie-info {
+  display: block;
+}

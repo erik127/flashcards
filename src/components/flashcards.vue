@@ -133,12 +133,10 @@ export default {
   transition: 0.4s;
   transform-style: preserve-3d;
   clear: both;
-  /*backface-visibility: hidden;*/
 }
 
 .flipped {
   transform: rotateY(180deg);
-  /*box-shadow: -2px 2px 10px 0 rgba(0, 0, 0, 0.2);*/
 }
 
 .front,
@@ -162,10 +160,11 @@ export default {
 }
 
 .back {
-  transform: rotateY(180deg);
+  transform: rotateY(-180deg);
  }
 
- .question,
+
+.question,
  .answer {
   text-align: center;
  }
@@ -323,6 +322,41 @@ export default {
 
 .toDeck3 {
   animation: toDeck3 .4s ease-in-out;
+}
+
+
+/*Internet Explorer Styles*/
+
+.ie .flashcards {
+  transition: none;
+}
+
+.ie .flipped,
+.ie .front,
+.ie .back {
+  transform: none;
+}
+
+.ie .front {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ie .back {
+  display: none;
+}
+
+.ie .flipped .front {
+  display: none;
+}
+
+.ie .flipped .back {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ie .back-button {
+  top: -8.5em;
 }
 
 </style>

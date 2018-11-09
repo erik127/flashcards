@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20" height="20" version="1.1" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+ <title>arrow-right</title>
+ <rect x="3" y=".5" width="14" height="19" rx="1" ry="1" fill="#fff" stroke="#ccc" stroke-linecap="square" stroke-miterlimit="0"/>
+ <circle cx="10" cy="13" r="4" fill="#11d4ff" stroke-width=".8"/>
+ <path d="m6 5h8" fill="none" stroke="#ccc" stroke-linecap="round" stroke-width="2px"/>
+</svg>

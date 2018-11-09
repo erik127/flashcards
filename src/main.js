@@ -6,6 +6,15 @@ import App from './App'
 
 Vue.config.productionTip = false
 
+const ua = window.navigator.userAgent
+const isIE = /MSIE|Trident/.test(ua)
+
+if (isIE) {
+  // IE specific code goes here
+  let body = document.getElementsByTagName('body')[0]
+  body.classList.add('ie')
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
