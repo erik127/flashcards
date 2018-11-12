@@ -12,7 +12,7 @@
       <li>vuejs</li>
     </ul>
 
-    <p class='ie-info'>NOTE: Currently this app doesn't work as nice on Internet Explorer as on other modern browsers as Chrome, Firefox, Opera or Edge<p>
+    <p class='ie-info'>NOTE: Currently this app doesn't work as nice in Internet Explorer as in other modern browsers as Chrome, Firefox, Opera or Edge.</p>
 
 
   </div>

@@ -2,7 +2,7 @@
   <div id="app" v-if='loaded'>
     <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
-      <h1>Flash</h1>
+      <h1>Flashcards</h1>
     </header>
     <main>
       <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel' @restart='restart'></settings>
