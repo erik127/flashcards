@@ -86,7 +86,9 @@ export default {
         status.rows[3].doc.data,
         status.rows[4].doc.data
       ]
-      console.log('setLoaded')
+
+      this.updateStats()
+      // console.log('setLoaded')
       // this.$emit('loaded', true)
       this.getCard()
     }
@@ -130,8 +132,8 @@ export default {
     // }
   },
   watch: {
-    restart: function () {
-      if (this.restart) {
+    restart () {
+      if (this.restart === 'yes') {
         console.log('restarting game')
         this.restartGame()
         this.$emit('restarted')
@@ -151,7 +153,6 @@ export default {
         this.transitionIn = 'fromDeck' + newRound.deck
         this.card = newRound.card
         this.currentDeck = newRound.deck
-        console.log('set showcard to true')
         this.isAnswer = false
         this.showcard = true
       }
@@ -176,7 +177,6 @@ export default {
       // this.flip()
     },
     afterLeave: function () {
-      console.log('getCard')
       this.getCard() // possibly need a settimout here?
       // window.setTimeout(function () { this.getCard() }, 600)
     },

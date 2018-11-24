@@ -49,13 +49,13 @@ export default {
       },
       stats: ['', '', '', ''],
       // loaded: false,
-      restart: false
+      restart: 'no'
     }
   },
   created: async function () {
     try {
       let settings = await db.get('settings')
-      this.settings = settings
+      this.settings = settings.data
     } catch (error) {
       if (error.status !== 404) {
         console.log(error)
@@ -83,7 +83,8 @@ export default {
         if (JSON.stringify(dbSettings.data) !== JSON.stringify(settings)) {
           dbSettings.data = parsedSettings
           await db.put(dbSettings)
-          this.restart = true
+          console.log('set this.restart to true')
+          this.restart = 'yes'
         }
       } catch (error) {
         console.log(error)
@@ -98,7 +99,7 @@ export default {
     },
     restartGame: function () {
       if (confirm('are you sure to restart? You will lose your history.')) {
-        this.restart = true
+        this.restart = 'yes'
       }
     }
   }
