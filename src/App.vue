@@ -25,7 +25,6 @@ import Info from './components/info'
 import Help from './components/help'
 import Flashcards from './components/flashcards'
 import Stats from './components/stats'
-// import { mapState } from 'vuex'
 
 const db = new PouchDB('flashcardsDB')
 
