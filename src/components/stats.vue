@@ -1,26 +1,25 @@
 <template>
   <div class="stats">
-    <div :class='stackheight(deckStats[0])'> 
-      <p>{{ deckStats[0] }}</p>
+    <div :class='stackheight(stats[0])'> 
+      <p>{{ stats[0] }}</p>
       <p>start</p>
     </div>
-    <div :class='stackheight(deckStats[1])'>
-      <p>{{ deckStats[1] }}</p>
+    <div :class='stackheight(stats[1])'>
+      <p>{{ stats[1] }}</p>
       <p>wrong</p>
     </div>
-    <div :class='stackheight(deckStats[2])'> 
-      <p>{{ deckStats[2] }}</p>
+    <div :class='stackheight(stats[2])'> 
+      <p>{{ stats[2] }}</p>
       <p>right</p>
     </div>
-    <div :class='stackheight(deckStats[3])'> 
-      <p>{{ deckStats[3] }}</p>
+    <div :class='stackheight(stats[3])'> 
+      <p>{{ stats[3] }}</p>
       <p>done</p>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
 
 export default {
   name: 'stats',
@@ -29,10 +28,10 @@ export default {
 
     }
   },
-  props: ['deckStats'],
+  props: ['stats'],
   methods: {
     stackheight: function (deck) {
-      let total = this.deckStats[0] + this.deckStats[1] + this.deckStats[2] + this.deckStats[3]
+      let total = this.stats[0] + this.stats[1] + this.stats[2] + this.stats[3]
       let factor = deck / total
       if (factor >= 1) {
         return 'hundred'
