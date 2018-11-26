@@ -2,14 +2,14 @@
   <div id="app" v-if='loaded'>
     <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
-      <h1>Flashcards</h1>
+      <h1> {{ view }} </h1>
     </header>
     <main>
       <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel' @restart='restartGame'></settings>
-      <info v-if='view === "info"'></info>
-      <help v-if='view === "help"'></help>
-      <flashcards :card='card' :showcard='showcard' :transitionIn='transitionIn' :transitionOut='transitionOut' :settings='settings' @answer='answer' @getCard='getCard' v-if='view === "home"'></flashcards>
-      <stats :stats='stats' v-if='view === "home"'></stats>
+      <info v-if='view === "about"'></info>
+      <help v-if='view === "how to"'></help>
+      <flashcards :card='card' :showcard='showcard' :transitionIn='transitionIn' :transitionOut='transitionOut' :settings='settings' @answer='answer' @getCard='getCard' v-if='view === "flashcards"'></flashcards>
+      <stats :stats='stats' v-if='view === "flashcards"'></stats>
     </main>
   </div>
 </template>
@@ -40,19 +40,20 @@ export default {
   },
   data () {
     return {
-      view: 'home',
+      view: 'flashcards',
       settings: {
         from: 'en',
         to: 'es',
         categories: ['greetings']
       },
+      oldSettings: {},
       decks: [ [], [], [], [] ],
       counter: 0,
       card: {},
       showcard: false,
       transitionIn: 'fromDeck0',
       transitionOut: '',
-      currentDeck: '',
+      fromDeck: '',
       loaded: false,
       restart: 'no'
     }
@@ -76,6 +77,7 @@ export default {
     } catch (error) {
       console.log(error)
     }
+    this.oldSettings = copy(this.settings)
     this.loaded = true
   },
   computed: {
@@ -131,9 +133,7 @@ export default {
           }
         }
       }
-      // this.$emit('loaded', true)
-      // this.updateStats()
-      this.view = 'home'
+      this.view = 'flashcards'
       let that = this
       window.setTimeout(function () { that.getCard() }, 500)
     },
@@ -147,8 +147,8 @@ export default {
         }
       } else {
         this.transitionIn = 'fromDeck' + newRound.deck
-        this.card = newRound.card
-        this.currentDeck = newRound.deck
+        this.card = this.decks[newRound.deck].splice(newRound.index, 1)[0]
+        this.fromDeck = newRound.deck
         this.isAnswer = false
         this.showcard = true
       }
@@ -166,16 +166,16 @@ export default {
         }
         this.card.lastry = 'right'
       }
-      this.updateDecks(this.currentDeck, newDeck, this.card)
+      this.updateDecks(this.fromDeck, newDeck, this.card)
     },
-    updateDecks: async function (currentDeck, newDeck, card) {
-      let i = this.decks[currentDeck].indexOf(card)
-      this.decks[currentDeck].splice(i, 1)
+    updateDecks: async function (fromDeck, newDeck, card) {
+      // let i = this.decks[fromDeck].indexOf(card)
+      // this.decks[fromDeck].splice(i, 1)
       this.decks[newDeck].push(card)
 
       this.transitionOut = 'toDeck' + newDeck
 
-      let newDecks = [{id: 'deck' + currentDeck, cards: this.decks[currentDeck]}, {id: 'deck' + newDeck, cards: this.decks[newDeck]}]
+      let newDecks = [{id: 'deck' + fromDeck, cards: this.decks[fromDeck]}, {id: 'deck' + newDeck, cards: this.decks[newDeck]}]
 
       try {
         for (const deck of newDecks) {
@@ -201,42 +201,48 @@ export default {
       }
     },
     changeView: function (view) {
-      if (this.view === view && view === 'settings') {
-        this.cancel()
+      if (JSON.stringify(this.settings) !== JSON.stringify(this.oldSettings) && confirm('Your settings are changed. Do you want to save them?')) {
+        this.updateSettings()
+      } else {
+        this.settings = copy(this.oldSettings)
       }
+
       if (this.view === view) {
-        this.view = 'home'
+        this.view = 'flashcards'
       } else {
         this.view = view
       }
     },
-    updateSettings: async function (settings) {
-      let parsedSettings = JSON.parse(JSON.stringify(settings))
+    updateSettings: async function () {
+      // let parsedSettings =
       try {
         let dbSettings = await db.get('settings')
-        if (JSON.stringify(dbSettings.data) !== JSON.stringify(settings)) {
-          dbSettings.data = parsedSettings
+        if (JSON.stringify(dbSettings.data) !== JSON.stringify(this.settings)) {
+          dbSettings.data = copy(this.settings)
           await db.put(dbSettings)
-          console.log('set this.restart to true')
-          this.restart = 'yes'
+          this.oldSettings = copy(this.settings)
+          this.restartGame()
         }
       } catch (error) {
         console.log(error)
       }
-      this.view = 'home'
+      this.view = 'flashcards'
     },
     cancel: function () {
-      this.view = 'home'
+      // let settingsString = JSON.stringify(settings)
+      // let thisSettingsString = JSON.stringify(this.settings)
+      // console.log(settingsString)
+      // console.log(thisSettingsString)
+      this.settings = copy(this.oldSettings)
+      this.view = 'flashcards'
     }
   }
 }
+
+const copy = object => JSON.parse(JSON.stringify(object))
 </script>
 
 <style>
-body {
-  margin: 0;
-}
-
 #app {
   font-family: Helvetica-light, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

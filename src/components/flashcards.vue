@@ -220,8 +220,7 @@ export default {
     opacity: 1;
   }
 }
-
-
+  
 @keyframes fromDeck1 {
   from {
     transform: translate3d(-50px, 700px, -2000px);
@@ -230,17 +229,6 @@ export default {
   to {
     transform: translate3d(0, 0, 0);
     opacity: 1;
-  }
-}
-
-@keyframes toDeck1 {
-  from {    
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
-    transform: translate3d(-50px, 700px, -2000px);
-    opacity: 0;
   }
 }
 
@@ -255,25 +243,14 @@ export default {
   }
 }
 
-@keyframes toDeck2 {
+@keyframes fromDeck3 {
   from {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
-    transform: translate3d(50px, 700px, -2000px);
-    opacity: 0;
-  }
-}
-
-@keyframes toDeck3 {
-  from {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
     transform: translate3d(200px, 700px, -2000px);
     opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }
 
@@ -286,7 +263,7 @@ export default {
 }
 
 .toDeck1 {
-  animation: toDeck1 .4s ease-in-out;
+  animation: fromDeck1 .4s ease-in-out reverse;
 }
 
 .fromDeck2 {
@@ -294,11 +271,15 @@ export default {
 }
 
 .toDeck2 {
-  animation: toDeck2 .4s ease-in-out;
+  animation: fromDeck2 .4s ease-in-out reverse;
+}
+
+.fromDeck3 {
+  animation: fromDeck3 .4s ease-in-out;
 }
 
 .toDeck3 {
-  animation: toDeck3 .4s ease-in-out;
+  animation: fromDeck3 .4s ease-in-out reverse;
 }
 
 

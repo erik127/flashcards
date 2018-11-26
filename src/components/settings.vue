@@ -40,6 +40,28 @@
 export default {
   name: 'settings',
   props: ['settings']
+  // data () {
+  //   return {
+  //     settings: {},
+  //     oldSettings: ''
+  //   }
+  // },
+  // created () {
+  //   this.oldSettings = JSON.stringify(this.settings)
+  //   this.settings = JSON.parse(JSON.stringify(this.settings))
+  // },
+  // methods: {
+  //   cancel: function () {
+  //     console.log(this.oldSettings)
+  //     console.log(JSON.stringify(this.settings))
+  //     console.log(JSON.stringify(this.settings))
+  //     if (JSON.stringify(this.settings) !== this.oldSettings && confirm('Your settings are changed. Do you want to save them?')) {
+  //       this.$emit('change', this.settings)
+  //     } else {
+  //       this.$emit('cancel', this.JSON.parse(this.oldSettings))
+  //     }
+  //   }
+  // }
 }
 </script>
 
