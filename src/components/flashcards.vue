@@ -94,7 +94,7 @@ export default {
 <style scoped>
 .container {
   perspective: 1000px;
-  margin: 3em auto;
+  margin: 5vh auto;
 }
 
 .container,

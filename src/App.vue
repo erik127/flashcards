@@ -1,7 +1,7 @@
 <template>
   <div id="app" v-if='loaded'>
-    <navbar :view='view' v-on:changeView='changeView'></navbar>
     <header>
+      <navbar :view='view' v-on:changeView='changeView'></navbar>
       <h1> {{ view }} </h1>
     </header>
     <main>
@@ -244,20 +244,45 @@ const copy = object => JSON.parse(JSON.stringify(object))
 
 <style>
 #app {
-  /*font-family: Helvetica-light, Arial, sans-serif;*/
   background-color: rgba(255, 255, 255, 0.3);
   width: 100%;
   max-width: 40em;
-  margin: 0 auto;
+  margin: 0em auto;
+  padding: 0 0 1em 0;
+  /*height: 97vh;
+  max-height: 54em;
+  display: flex;
+  flex-direction: column;*/
+  /*justify-content: space-between;*/
 }
 
 header {
-  margin: 0;
-  height: 2em;
-  text-align: center;
+  height: 20vh;
+  max-height: 8em;
+  min-height: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-header span {
+main {
+/*  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;*/
+}
+
+@media only screen and (max-height: 640px) {
+  header {
+    max-height: 6em;
+  }
+
+  .button {
+    height: 2.5em;
+  }
+}
+
+/*header span {
   display: block;
   position: relative;
   font-size: 1em;
@@ -266,6 +291,6 @@ header span {
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
-}
+}*/
 
 </style>

@@ -11,6 +11,8 @@ body {
 h1 {
   text-transform: uppercase;
   letter-spacing: .1em;
+  text-align: center;
+  margin: 0;
 }
 
 h2 {
