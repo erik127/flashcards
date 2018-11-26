@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>
+    <h2>
       How to use flashcards
-    </h3>
+    </h2>
     <p><strong>
       Introduction
     </strong></p>
@@ -63,9 +63,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
-  width: 20em;
-  margin: 3em auto;
-  font-size: 0.8em;
+  /*width: 20em;*/
+  margin: 3em 1em;
+  /*font-size: 0.8em;*/
 }
 
 </style>

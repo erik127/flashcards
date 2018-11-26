@@ -66,7 +66,7 @@ export default {
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .settings {
   width: 15em;
   margin: 1em auto;

@@ -244,11 +244,11 @@ const copy = object => JSON.parse(JSON.stringify(object))
 
 <style>
 #app {
-  font-family: Helvetica-light, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  background-color: rgba(255, 255, 255, 0.3)
+  /*font-family: Helvetica-light, Arial, sans-serif;*/
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  max-width: 40em;
+  margin: 0 auto;
 }
 
 header {
