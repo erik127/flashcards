@@ -144,6 +144,7 @@ export default {
 .question,
  .answer {
   text-align: center;
+  font-size: 1.5em;
  }
 
 .button-box {

@@ -3,9 +3,12 @@ On start:
   else -> set to default (from: English,  to: Spanish, categories: Greetings)
   select new card
 
+Play card:
+  Based on counter, decide which deck to take the card from
+  Remove card from this deck and animate it to the play area
+
 On card played:
   update status in Vue:
-    remove card from old deck
     move card to new deck
   save decks to pouchDB
   select new card

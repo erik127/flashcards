@@ -74,6 +74,10 @@ export default {
   overflow-y: auto;
 }
 
+h3 {
+  margin: 2em 0 1em 0;
+}
+
 input {
   float: left;
   clear: left;
@@ -84,17 +88,6 @@ label {
   clear: right;
 }
 
-h3 {
-  float: left;
-  clear: both;
-  margin: 1em 0 1em 0;
-}
-
-input[type='button'] {
-  width: 3em;
-  margin: 1em auto;
-}
-
 input[type='button'] {
   -webkit-appearance: none;
   background: -webkit-linear-gradient(#f3f3f3, #f3f3f3);
@@ -102,7 +95,7 @@ input[type='button'] {
   border: 1px solid #ddd;
   border-radius: 4px;
   display: block;
-  margin: 2em 2px 2px 2px;
+  margin: 4em 2px 2px 2px;
   padding: 0;
   width: 30%;
   min-width: 4em;
