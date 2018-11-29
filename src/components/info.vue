@@ -8,6 +8,7 @@
 
     <h3>To do:</h3>
     <ul>
+      <li>Add a welcome modal with some info on how to it works, only on first time use</li>
       <li>Make the interface itself multi-lingual</li>
       <li>Keep stats about the percentage of cards answered wrong and right per category</li>
       <li>Create a lot more categories</li>
