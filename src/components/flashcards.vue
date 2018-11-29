@@ -140,7 +140,6 @@ export default {
   transform: rotateY(-180deg);
  }
 
-
 .question,
  .answer {
   text-align: center;
@@ -151,7 +150,6 @@ export default {
   align-self: flex-end;
   position: relative;
   display: flex;
-/*  align-items: center;*/
   width: 100%;
   height: 30%;
 }
@@ -179,11 +177,6 @@ export default {
 .wrong circle {
   fill: #d41111;
 }
-
-/*.right {
-  position: absolute;
-  right: 0;
-}*/
 
 .right circle {
   fill: #11d42e;

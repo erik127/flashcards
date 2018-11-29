@@ -80,9 +80,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
-  /*width: 20em;*/
   margin: 3em 1em;
-  /*font-size: 0.8em;*/
 }
 
 </style>

@@ -27,6 +27,9 @@
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
     <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.publicPath %>static/stylesheets/styles.css">
+    <!-- polyfills for fetch and promises in ie --> 
+    <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
   </head>
   <body>
     <?xml version="1.0" encoding="UTF-8"?>

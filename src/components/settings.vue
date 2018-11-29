@@ -26,8 +26,6 @@
     <h3>Categories</h3>
     <input type='checkbox' id='greetings' value='greetings' v-model='settings.categories'>
     <label for='greetings'>Greetings</label>
-    <!-- <input type='checkbox' id='vocabulary' value='vocabulary' v-model='settings.categories'>
-    <label for='vocabulary'>Vocabulary</label> -->
     <input type='checkbox' id='presReg' value='present-regular' v-model='settings.categories'>
     <label for='presReg'>Verbs</label>
     <input type='button' class='float-right' value='OK' @click='$emit("change",settings)'>
@@ -40,28 +38,6 @@
 export default {
   name: 'settings',
   props: ['settings']
-  // data () {
-  //   return {
-  //     settings: {},
-  //     oldSettings: ''
-  //   }
-  // },
-  // created () {
-  //   this.oldSettings = JSON.stringify(this.settings)
-  //   this.settings = JSON.parse(JSON.stringify(this.settings))
-  // },
-  // methods: {
-  //   cancel: function () {
-  //     console.log(this.oldSettings)
-  //     console.log(JSON.stringify(this.settings))
-  //     console.log(JSON.stringify(this.settings))
-  //     if (JSON.stringify(this.settings) !== this.oldSettings && confirm('Your settings are changed. Do you want to save them?')) {
-  //       this.$emit('change', this.settings)
-  //     } else {
-  //       this.$emit('cancel', this.JSON.parse(this.oldSettings))
-  //     }
-  //   }
-  // }
 }
 </script>
 

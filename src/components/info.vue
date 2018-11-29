@@ -8,6 +8,7 @@
 
     <h3>To do:</h3>
     <ul>
+      <li>Add a welcome modal with some info on how to it works, only on first time use</li>
       <li>Make the interface itself multi-lingual</li>
       <li>Keep stats about the percentage of cards answered wrong and right per category</li>
       <li>Create a lot more categories</li>
@@ -41,9 +42,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
-  /*width: 20em;*/
   margin: 3em 1em;
-  /*font-size: 0.8em;*/
 }
 
 </style>
