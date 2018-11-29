@@ -9,7 +9,7 @@ const ua = window.navigator.userAgent
 const isIE = /MSIE|Trident/.test(ua)
 
 if (isIE) {
-  // IE specific code goes here
+  // IE specific code, IE does not support backface visibility hidden.
   let body = document.getElementsByTagName('body')[0]
   body.classList.add('ie')
 }
@@ -17,7 +17,6 @@ if (isIE) {
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // store,
   template: '<App/>',
   components: { App }
 })

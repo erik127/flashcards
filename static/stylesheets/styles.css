@@ -21,8 +21,13 @@ h2 {
 
 h3 {
   font-size: 1em;
-  margin: 1em 0 1em 0;
+  margin: 3em 0 1em 0;
 }
+
+a {
+  color: inherit;
+}
+
 
 .width-2em {
   width: 2em; 

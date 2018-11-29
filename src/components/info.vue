@@ -6,19 +6,19 @@
 
     <p>If it were a 'real' app, I would sync the stats back to a back-end server whenever you're online. You can then login from any device and continue where you were. And what about adding your own cards? That would be nice too.</p>
 
-    <p>To do:</p>
+    <h3>To do:</h3>
     <ul>
       <li>Make the interface itself multi-lingual</li>
       <li>Keep stats about the percentage of cards answered wrong and right per category</li>
       <li>Create a lot more categories</li>
+      <li>Add 'create your own card' functionality</li>
     </ul>
 
-    <p>Credits:</p>
+    <h3>Made with:</h3>
     <ul>
-      <li>PouchDB for local storage</li>
-      <li>VueJS for the javascript framework</li>
-      <li><a href='https://en.wikipedia.org/wiki/Leitner_system'>Leitner</a> for the Flashcard method</li>
-
+      <li><a href="https://pouchdb.com" target="_blank">PouchDB</a> for local storage</li>
+      <li><a href="https://vuejs.org" target="_blank">Vue.js</a> for the javascript framework</li>
+      <li><a href='https://en.wikipedia.org/wiki/Leitner_system' target="_blank">Leitner</a> for the Flashcard method</li>
     </ul>
 
     <p class='ie-info'>NOTE: Currently this app doesn't work as nice in Internet Explorer as in other modern browsers as Chrome, Firefox, Opera or Edge.</p>
@@ -41,9 +41,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
-  /*width: 20em;*/
   margin: 3em 1em;
-  /*font-size: 0.8em;*/
 }
 
 </style>

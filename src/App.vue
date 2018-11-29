@@ -169,8 +169,6 @@ export default {
       this.updateDecks(this.fromDeck, newDeck, this.card)
     },
     updateDecks: async function (fromDeck, newDeck, card) {
-      // let i = this.decks[fromDeck].indexOf(card)
-      // this.decks[fromDeck].splice(i, 1)
       this.decks[newDeck].push(card)
 
       this.transitionOut = 'toDeck' + newDeck
@@ -214,7 +212,6 @@ export default {
       }
     },
     updateSettings: async function () {
-      // let parsedSettings =
       try {
         let dbSettings = await db.get('settings')
         if (JSON.stringify(dbSettings.data) !== JSON.stringify(this.settings)) {
@@ -229,10 +226,6 @@ export default {
       this.view = 'flashcards'
     },
     cancel: function () {
-      // let settingsString = JSON.stringify(settings)
-      // let thisSettingsString = JSON.stringify(this.settings)
-      // console.log(settingsString)
-      // console.log(thisSettingsString)
       this.settings = copy(this.oldSettings)
       this.view = 'flashcards'
     }
@@ -249,11 +242,6 @@ const copy = object => JSON.parse(JSON.stringify(object))
   max-width: 40em;
   margin: 0em auto;
   padding: 0 0 1em 0;
-  /*height: 97vh;
-  max-height: 54em;
-  display: flex;
-  flex-direction: column;*/
-  /*justify-content: space-between;*/
 }
 
 header {
@@ -265,13 +253,6 @@ header {
   justify-content: space-between;
 }
 
-main {
-/*  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;*/
-}
-
 @media only screen and (max-height: 640px) {
   header {
     max-height: 6em;
@@ -281,16 +262,5 @@ main {
     height: 2.5em;
   }
 }
-
-/*header span {
-  display: block;
-  position: relative;
-  font-size: 1em;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}*/
 
 </style>
