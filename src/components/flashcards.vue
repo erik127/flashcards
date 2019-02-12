@@ -81,9 +81,9 @@ export default {
     },
     processAnswer: function (reply) {
       this.$emit('answer', reply)
-      this.flip()
     },
     afterLeave: function () {
+      this.flip()
       this.$emit('getCard')
     }
   }
@@ -94,7 +94,7 @@ export default {
 <style scoped>
 .container {
   perspective: 1000px;
-  margin: 5vh auto;
+  margin: 5em auto;
 }
 
 .container,

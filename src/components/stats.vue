@@ -63,10 +63,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.float-right {
-  float: right;
-}
-
 .stats {
   width: 15em;
   margin: 0 auto;

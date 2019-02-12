@@ -63,6 +63,9 @@
     <p>
       On Mac, the add to desktop functionality in Chrome is under construction. At the time of writing it works a bit after enabling the <a href='chrome://flags/#enable-desktop-pwas'></a> flag. OsX Safari doesn't seem to support this yet.
     </p>
+
+    <button class='button button-green float-right' @click='$emit("close")'>close</button>
+
   </div>
 </template>
 

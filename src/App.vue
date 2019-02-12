@@ -1,13 +1,16 @@
 <template>
   <div id="app" v-if='loaded'>
-    <header>
+    <nav>
       <navbar :view='view' v-on:changeView='changeView'></navbar>
+    </nav>
+    <header>
       <h1> {{ view }} </h1>
     </header>
     <main>
+      <intro v-if='showIntro' @close='showIntro = false'></intro>
       <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel' @restart='restartGame'></settings>
-      <info v-if='view === "about"'></info>
-      <help v-if='view === "how to"'></help>
+      <info v-if='view === "about"' @close='view = "flashcards"'></info>
+      <help v-if='view === "how to"' @close='view = "flashcards"'></help>
       <flashcards :card='card' :showcard='showcard' :transitionIn='transitionIn' :transitionOut='transitionOut' :settings='settings' @answer='answer' @getCard='getCard' v-if='view === "flashcards"'></flashcards>
       <stats :stats='stats' v-if='view === "flashcards"'></stats>
     </main>
@@ -23,6 +26,7 @@ import Navbar from './components/navbar'
 import Settings from './components/settings'
 import Info from './components/info'
 import Help from './components/help'
+import Intro from './components/intro'
 import Flashcards from './components/flashcards'
 import Stats from './components/stats'
 
@@ -36,7 +40,8 @@ export default {
     Info,
     Help,
     Flashcards,
-    Stats
+    Stats,
+    Intro
   },
   data () {
     return {
@@ -55,13 +60,15 @@ export default {
       transitionOut: '',
       fromDeck: '',
       loaded: false,
-      restart: 'no'
+      restart: 'no',
+      showIntro: false
     }
   },
   created: async function () {
     try {
       let status = await db.allDocs({include_docs: true})
       if (status.rows.length === 0) {
+        this.showIntro = true
         this.restartGame()
       } else {
         this.counter = status.rows[0].doc.data
@@ -240,24 +247,17 @@ const copy = object => JSON.parse(JSON.stringify(object))
   background-color: rgba(255, 255, 255, 0.3);
   width: 100%;
   max-width: 40em;
-  margin: 0em auto;
-  padding: 0 0 1em 0;
-}
-
-header {
-  height: 20vh;
-  max-height: 8em;
-  min-height: 5em;
+  height: 100vh;
+  max-height: 50em;
+  margin: auto;
+  padding: 1em 0 3em 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 @media only screen and (max-height: 640px) {
-  header {
-    max-height: 6em;
-  }
-
   .button {
     height: 2.5em;
   }

@@ -28,9 +28,9 @@
     <label for='greetings'>Greetings</label>
     <input type='checkbox' id='presReg' value='present-regular' v-model='settings.categories'>
     <label for='presReg'>Verbs</label>
-    <input type='button' class='float-right' value='OK' @click='$emit("change",settings)'>
-    <input type='button' value='Cancel' @click='$emit("cancel")'>
-    <input type='button' value='Restart' @click='$emit("restart")'>
+    <input type='button' class='button button-green float-right' value='OK' @click='$emit("change",settings)'>
+    <input type='button' class='button' value='Cancel' @click='$emit("cancel")'>
+    <input type='button' class='button' value='Restart' @click='$emit("restart")'>
   </div>
 </template>
 
@@ -52,56 +52,6 @@ export default {
 
 h3 {
   margin: 2em 0 1em 0;
-}
-
-input {
-  float: left;
-  clear: left;
-}
-
-label {
-  float: left;
-  clear: right;
-}
-
-input[type='button'] {
-  -webkit-appearance: none;
-  background: -webkit-linear-gradient(#f3f3f3, #f3f3f3);
-  background: linear-gradient(#f3f3f3,#f3f3f3);
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  display: block;
-  margin: 4em 2px 2px 2px;
-  padding: 0;
-  width: 30%;
-  min-width: 4em;
-  height: 2.5em;
-  cursor: pointer;
-  -webkit-box-shadow: 2px 2px 6px 0 rgba(150, 150, 150, 0.3);
-  box-shadow: 2px 2px 6px 0 rgba(150, 150, 150, 0.3);
-}
-
-input[value='OK'] {
-  float: right;
-  background: -webkit-linear-gradient(#0db026, #0db026);
-  background: linear-gradient(#0db026, #0db026);
-  border: 1px solid #ddd;
-  color: #fff;
-  font-weight: bold;
-}
-
-input[type='radio'] {
-  display: none;
-}
-
-input[type='radio']+label {
-  width: 5em;
-  padding: .2em;
-}
-
-input[type='radio']:checked+label {
-  border: 2px solid #0db026;
-  border-radius: 4px;
 }
 
 .languages {
