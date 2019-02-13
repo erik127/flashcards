@@ -1,48 +1,51 @@
 <template>
-  <div class='container'>
-    <transition 
-        name='cardmove'
-        :enter-active-class='transitionIn'
-        :leave-active-class='transitionOut'
-        @after-leave="afterLeave">
-      <div v-if='showcard'>
-        <div class='flashcards' :class='{flipped: isAnswer}'>
-          <div class='front'>
-            <p class='question'>{{question}}</p>
-            <div class='button-box'>
-              <svg viewBox='0 0 20 20' class='flip' @click='flip()'>
-                <title>flip</title>
-                <circle cx='10' cy='10' r='9'/>
-                <path d='m3 10 h13'/>
-                <path d='m12 5 5 5 -5 5'/>
-              </svg>
+  <div>
+    <h1> Flashcards </h1>
+      <div class='container'>
+      <transition 
+          name='cardmove'
+          :enter-active-class='transitionIn'
+          :leave-active-class='transitionOut'
+          @after-leave="afterLeave">
+        <div v-if='showcard'>
+          <div class='flashcards' :class='{flipped: isAnswer}'>
+            <div class='front'>
+              <p class='question'>{{question}}</p>
+              <div class='button-box'>
+                <svg viewBox='0 0 20 20' class='flip' @click='flip()'>
+                  <title>flip</title>
+                  <circle cx='10' cy='10' r='9'/>
+                  <path d='m3 10 h13'/>
+                  <path d='m12 5 5 5 -5 5'/>
+                </svg>
+              </div>
             </div>
-          </div>
-          <div class='back'>
-            <svg viewBox='0 0 20 20' class='back-button' @click='flip()'>
-                <title>back</title>
-                <circle cx='10' cy='10' r='9'/>
-                <path d="m8 9 -3 3 3 3"/>
-                <path d="m6 12c9-0 12-3 7-6"/>
-              </svg>
-            <p class='answer'>{{answer}}</p>
-            <div class='button-box'>
-              <svg viewBox='0 0 20 20' class='wrong' @click='processAnswer("wrong")'>
-                <title>wrong</title>
-                <circle cx='10' cy='10' r='9'/>
-                <path d='m5 5 10 10'/>
-                <path d='m5 15 10 -10'/>
-              </svg>
-              <svg viewBox='0 0 20 20' class='right' @click='processAnswer("right")'>
-                <title>right</title>
-                <circle cx='10' cy='10' r='9'/>
-                <path d='M 4,11 9,16 15,5'/>
-              </svg>
+            <div class='back'>
+              <svg viewBox='0 0 20 20' class='back-button' @click='flip()'>
+                  <title>back</title>
+                  <circle cx='10' cy='10' r='9'/>
+                  <path d="m8 9 -3 3 3 3"/>
+                  <path d="m6 12c9-0 12-3 7-6"/>
+                </svg>
+              <p class='answer'>{{answer}}</p>
+              <div class='button-box'>
+                <svg viewBox='0 0 20 20' class='wrong' @click='processAnswer("wrong")'>
+                  <title>wrong</title>
+                  <circle cx='10' cy='10' r='9'/>
+                  <path d='m5 5 10 10'/>
+                  <path d='m5 15 10 -10'/>
+                </svg>
+                <svg viewBox='0 0 20 20' class='right' @click='processAnswer("right")'>
+                  <title>right</title>
+                  <circle cx='10' cy='10' r='9'/>
+                  <path d='M 4,11 9,16 15,5'/>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -94,10 +97,10 @@ export default {
 <style scoped>
 .container {
   perspective: 1000px;
-  margin: 5em auto;
+  margin: 0em auto;
+  height: 25em;
 }
 
-.container,
 .flashcards,
 .front,
 .back {
@@ -106,6 +109,7 @@ export default {
 }
 
 .flashcards {
+  margin: 0 auto;
   position: relative;
   transition: 0.4s;
   transform-style: preserve-3d;

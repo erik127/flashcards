@@ -1,20 +1,20 @@
 <template>
   <div class="stats">
     <div :class='stackheight(stats[0])'> 
-      <p>{{ stats[0] }}</p>
-      <p>start</p>
+      <p> {{ stats[0] }} </p>
+      <p> {{ start[appLanguage] }} </p>
     </div>
     <div :class='stackheight(stats[1])'>
-      <p>{{ stats[1] }}</p>
-      <p>wrong</p>
+      <p> {{ stats[1] }} </p>
+      <p> {{ wrong[appLanguage] }} </p>
     </div>
     <div :class='stackheight(stats[2])'> 
-      <p>{{ stats[2] }}</p>
-      <p>right</p>
+      <p> {{ stats[2] }} </p>
+      <p> {{ right[appLanguage] }} </p>
     </div>
     <div :class='stackheight(stats[3])'> 
-      <p>{{ stats[3] }}</p>
-      <p>done</p>
+      <p> {{ stats[3] }} </p>
+      <p> {{ done[appLanguage] }} </p>
     </div>
   </div>
 </template>
@@ -25,10 +25,29 @@ export default {
   name: 'stats',
   data () {
     return {
-
+      start: {
+        en: 'start',
+        es: 'inicio',
+        nl: 'start'
+      },
+      wrong: {
+        en: 'wrong',
+        es: 'error',
+        nl: 'fout'
+      },
+      right: {
+        en: 'right',
+        es: 'correct',
+        nl: 'goed'
+      },
+      done: {
+        en: 'done',
+        es: 'hecho',
+        nl: 'klaar'
+      }
     }
   },
-  props: ['stats'],
+  props: ['stats', 'appLanguage'],
   methods: {
     stackheight: function (deck) {
       let total = this.stats[0] + this.stats[1] + this.stats[2] + this.stats[3]
@@ -65,7 +84,7 @@ export default {
 <style>
 .stats {
   width: 15em;
-  margin: 0 auto;
+  margin: 0em auto;
   text-align: center;
   display: flex;
   flex-direction: row;

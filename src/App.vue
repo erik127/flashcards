@@ -1,18 +1,53 @@
 <template>
   <div id="app" v-if='loaded'>
-    <nav>
-      <navbar :view='view' v-on:changeView='changeView'></navbar>
-    </nav>
     <header>
-      <h1> {{ view }} </h1>
+      <nav>
+        <navbar :appLanguage='appLanguage' :view='view' v-on:changeView='changeView'></navbar>
+      </nav>
     </header>
     <main>
-      <intro v-if='showIntro' @close='showIntro = false'></intro>
-      <settings :settings='settings' v-if='view === "settings"' @change='updateSettings' @cancel='cancel' @restart='restartGame'></settings>
-      <info v-if='view === "about"' @close='view = "flashcards"'></info>
-      <help v-if='view === "how to"' @close='view = "flashcards"'></help>
-      <flashcards :card='card' :showcard='showcard' :transitionIn='transitionIn' :transitionOut='transitionOut' :settings='settings' @answer='answer' @getCard='getCard' v-if='view === "flashcards"'></flashcards>
-      <stats :stats='stats' v-if='view === "flashcards"'></stats>
+      <transition name='intro'>
+        <intro 
+          v-if='showIntro' 
+          :appLanguage='appLanguage' 
+          @close='showIntro = false' 
+          @switchLanguage='switchLanguage'
+        ></intro>
+      </transition>
+      <settings 
+        v-if='view === "settings"' 
+        :settings='settings' 
+        :appLanguage='appLanguage' 
+        @change='updateSettings' 
+        @cancel='cancel' 
+        @restart='restartGame'
+        @switchLanguage='switchLanguage'
+      ></settings>
+      <info
+        v-if='view === "about"' 
+        :appLanguage='appLanguage'
+        @close='view = "flashcards"'
+      ></info>
+      <help
+        v-if='view === "how to"'
+        :appLanguage='appLanguage'
+        @close='view = "flashcards"'
+      ></help>
+      <flashcards
+        v-if='view === "flashcards"'
+        :card='card' 
+        :showcard='showcard' 
+        :transitionIn='transitionIn' 
+        :transitionOut='transitionOut' 
+        :settings='settings'
+        @answer='answer' 
+        @getCard='getCard' 
+      ></flashcards>
+      <stats
+        v-if='view === "flashcards"'
+        :appLanguage='appLanguage' 
+        :stats='stats' 
+      ></stats>
     </main>
   </div>
 </template>
@@ -46,6 +81,7 @@ export default {
   data () {
     return {
       view: 'flashcards',
+      appLanguage: 'en',
       settings: {
         from: 'en',
         to: 'es',
@@ -59,6 +95,7 @@ export default {
       transitionIn: 'fromDeck0',
       transitionOut: '',
       fromDeck: '',
+      lastDeck: '',
       loaded: false,
       restart: 'no',
       showIntro: false
@@ -71,14 +108,15 @@ export default {
         this.showIntro = true
         this.restartGame()
       } else {
-        this.counter = status.rows[0].doc.data
+        this.appLanguage = status.rows[0].doc.data
+        this.counter = status.rows[1].doc.data
         this.decks = [
-          status.rows[1].doc.data,
           status.rows[2].doc.data,
           status.rows[3].doc.data,
-          status.rows[4].doc.data
+          status.rows[4].doc.data,
+          status.rows[5].doc.data
         ]
-        this.settings = status.rows[5].doc.data
+        this.settings = status.rows[6].doc.data
         this.getCard()
       }
     } catch (error) {
@@ -86,6 +124,16 @@ export default {
     }
     this.oldSettings = copy(this.settings)
     this.loaded = true
+  },
+  mounted: function () {
+    let language = window.navigator.language
+    if (language === 'nl') {
+      this.appLanguage = 'nl'
+    } else if (language === 'es') {
+      this.appLanguage = 'es'
+    } else {
+      this.appLanguage = 'en'
+    }
   },
   computed: {
     stats: function () {
@@ -119,6 +167,7 @@ export default {
       }
 
       let status = [
+        {_id: 'appLanguage', data: this.appLanguage},
         {_id: 'counter', data: this.counter},
         {_id: 'deck0', data: this.decks[0]},
         {_id: 'deck1', data: this.decks[1]},
@@ -145,7 +194,7 @@ export default {
       window.setTimeout(function () { that.getCard() }, 500)
     },
     getCard: function () {
-      let newRound = cardselector(this.decks, this.counter)
+      let newRound = cardselector(this.decks, this.counter, this.lastDeck)
       if (newRound === 'end') {
         if (confirm('congratulations, you mastered it! Do you want to reshuffle the cards?')) {
           this.restartGame()
@@ -163,16 +212,17 @@ export default {
     answer: function (reply) {
       let newDeck
       if (reply === 'wrong') {
-        this.card.lastry = 'wrong'
+        this.card.lastTry = 'wrong'
         newDeck = 1
       } else {
-        if (this.card.lastry === 'right') {
+        if (this.card.lastTry === 'right') {
           newDeck = 3
         } else {
           newDeck = 2
         }
-        this.card.lastry = 'right'
+        this.card.lastTry = 'right'
       }
+      this.lastDeck = newDeck
       this.updateDecks(this.fromDeck, newDeck, this.card)
     },
     updateDecks: async function (fromDeck, newDeck, card) {
@@ -235,6 +285,16 @@ export default {
     cancel: function () {
       this.settings = copy(this.oldSettings)
       this.view = 'flashcards'
+    },
+    switchLanguage: async function (lan) {
+      this.appLanguage = lan
+      try {
+        let dbLanguage = await db.get('appLanguage')
+        dbLanguage.data = this.appLanguage
+        await db.put(dbLanguage)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
@@ -248,13 +308,25 @@ const copy = object => JSON.parse(JSON.stringify(object))
   width: 100%;
   max-width: 40em;
   height: 100vh;
-  max-height: 50em;
+  max-height: 45em;
   margin: auto;
-  padding: 1em 0 3em 0;
+  /*padding: 1em 0 3em 0;*/
   box-sizing: border-box;
-  display: flex;
+  /*display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between;*/
+}
+
+header {
+  margin: 2em auto 1em;
+}
+
+.intro-leave-active, intro-enter-active {
+  transition: opacity .4s;
+}
+
+.intro-leave-to, intro-enter-from {
+  opacity: 0;
 }
 
 @media only screen and (max-height: 640px) {
