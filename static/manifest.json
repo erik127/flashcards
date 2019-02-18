@@ -1,6 +1,6 @@
 {
-  "name": "spanish",
-  "short_name": "spanish",
+  "name": "flashcards",
+  "short_name": "flashcards",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",

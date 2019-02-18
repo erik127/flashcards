@@ -24,6 +24,11 @@
         <li><a href='https://en.wikipedia.org/wiki/Leitner_system' target="_blank">Leitner</a> for the Flashcard method</li>
       </ul>
 
+      <h2>Made by:</h2>
+      <ul>
+        <li><a href='https://www.stuit.works'>stuit.works</a></li>
+      </ul>
+
       <p class='ie-info'>NOTE: Currently this app doesn't work as nice in Internet Explorer as in other modern browsers as Chrome, Firefox, Opera or Edge.</p>
 
       <button class='button button-green float-right' @click='$emit("close")'>close</button>
@@ -52,6 +57,11 @@
         <li> <a href='https://en.wikipedia.org/wiki/Leitner_system' target="_blank"> Leitner </a> para el método de la tarjeta flash </li>
       </ul>
 
+      <h2> Hecho por: </h2>
+      <ul>
+        <li><a href='https://www.stuit.works'>stuit.works</a></li>
+      </ul>
+
       <p class = 'ie-info'> NOTA: Actualmente, esta aplicación no funciona tan bien en Internet Explorer como en otros navegadores modernos como Chrome, Firefox, Opera o Edge. </p>
 
       <button class = 'button button-green float-right' @click = '$emit("close")'> cerrar 
@@ -78,6 +88,11 @@
         <li> <a href="https://pouchdb.com" target="_blank"> PouchDB </a> voor lokale opslag </li>
         <li> <a href="https://vuejs.org" target="_blank"> Vue.js </a> voor het JavaScript-framework </li>
         <li> <a href='https://en.wikipedia.org/wiki/Leitner_system' target="_blank"> Leitner </a> voor de Flashcard-methode </li>
+      </ul>
+
+      <h2>Gemaakt door:</h2>
+      <ul>
+        <li><a href='https://www.stuit.works'>stuit.works</a></li>
       </ul>
 
       <p class = 'ie-info'> opmerking: momenteel werkt deze app niet zo goed in Internet Explorer als in andere moderne browsers zoals Chrome, Firefox, Opera of Edge. </p>
