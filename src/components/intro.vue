@@ -93,8 +93,9 @@ export default {
 
 .intro-inner svg {
   width: 1.5em;
+  height: 1.5em;
   position: relative;
-  top: 0.5em;
+  top: 0.2em;
 }
 
 .intro-inner language-switcher {

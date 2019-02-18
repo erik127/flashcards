@@ -8,7 +8,7 @@
 
       <p>If it were a 'real' app, I would sync the stats back to a back-end server whenever you're online. You can then login from any device and continue where you were. And what about adding your own cards? That would be nice too.</p>
 
-      <h3>To do:</h3>
+      <h2>To do:</h2>
       <ul>
         <li>Make the app itself multi-lingual</li>
         <li>Keep stats about the percentage of cards answered wrong and right per category</li>
@@ -17,7 +17,7 @@
         <li>Add speach recognition so you can talk to the app</li>
       </ul>
 
-      <h3>Made with:</h3>
+      <h2>Made with:</h2>
       <ul>
         <li><a href="https://pouchdb.com" target="_blank">PouchDB</a> for local storage</li>
         <li><a href="https://vuejs.org" target="_blank">Vue.js</a> for the javascript framework</li>
@@ -37,7 +37,7 @@
 
       <p> Si se tratara de una aplicación "real", sincronizaría las estadísticas con un servidor cada vez que estés en línea. Luego puedes iniciar sesión desde cualquier dispositivo y continuar donde estaba. Y añadir tus propias tarjetas? Eso también sería bueno.</p>
 
-      <h3> To Do: </h3>
+      <h2> To Do: </h2>
       <ul>
         <li> Mantener las estadísticas sobre el porcentaje de tarjetas incorrectas y correctas por categoría </li>
         <li> Creer muchas más categorías </li>
@@ -45,7 +45,7 @@
         <li> Añadir el reconocimiento de voz para que puedes hablar con la aplicación </li>
       </ul>
 
-      <h3> Hecho con: </h3>
+      <h2> Hecho con: </h2>
       <ul>
         <li> <a href="https://pouchdb.com" target="_blank"> PouchDB </a> para almacenamiento local </li>
         <li> <a href="https://vuejs.org" target="_blank"> Vue.js </a> para el javascript framework </li>
@@ -65,7 +65,7 @@
 
       <p> Als het een 'echte' app zou zijn, zou ik de statistieken synchroniseren naar een back-end-server wanneer je online bent. Je kunt dan inloggen vanaf elk apparaat en doorgaan waar je was. En het toevoegen van je eigen kaarten? Dat zou ook leuk zijn. </p>
 
-      <h3> To Do: </h3>
+      <h2> To Do: </h2>
       <ul>
         <li> Houd statistieken bij over het percentage juist en onjuist beantwoordde kaarten per categorie </li>
         <li> Maak veel meer categorieën </li>
@@ -73,7 +73,7 @@
         <li> Spraakherkenning toevoegen, zodat je tegen de app kunt praten </li>
       </ul>
 
-      <h3> Gemaakt met: </h3>
+      <h2> Gemaakt met: </h2>
       <ul>
         <li> <a href="https://pouchdb.com" target="_blank"> PouchDB </a> voor lokale opslag </li>
         <li> <a href="https://vuejs.org" target="_blank"> Vue.js </a> voor het JavaScript-framework </li>

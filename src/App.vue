@@ -56,6 +56,7 @@
 import PouchDB from 'pouchdb'
 import Greetings from './data/greetings'
 import PresentRegular from './data/present-regular'
+import Family from './data/family'
 import cardselector from './components/cardselector'
 import Navbar from './components/navbar'
 import Settings from './components/settings'
@@ -162,6 +163,13 @@ export default {
       if (this.settings.categories.indexOf('present-regular') > -1) {
         let clonedPresentRegular = JSON.parse(JSON.stringify(PresentRegular))
         for (const card of clonedPresentRegular) {
+          this.decks[0].push(card)
+        }
+      }
+
+      if (this.settings.categories.indexOf('family') > -1) {
+        let clonedFamily = JSON.parse(JSON.stringify(Family))
+        for (const card of clonedFamily) {
           this.decks[0].push(card)
         }
       }

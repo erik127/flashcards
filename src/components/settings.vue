@@ -3,7 +3,7 @@
     <h1> {{ h1settings[appLanguage] }} </h1>
     <language-switcher :appLanguage='appLanguage' @switchLanguage='switchLanguage'></language-switcher>
     <div class='item languages'>
-      <h3> {{ languages[appLanguage] }} </h3>
+      <h2> {{ languages[appLanguage] }} </h2>
       <div>
         <strong> {{ from[appLanguage] }} </strong>
         <input type='radio' id='fromEn' value='en' v-model='settings.from'>
@@ -26,9 +26,11 @@
     </div>
 
     <div class='item categories'>
-      <h3> {{ categories[appLanguage] }} </h3>
+      <h2> {{ categories[appLanguage] }} </h2>
       <input type='checkbox' id='greetings' value='greetings' v-model='settings.categories'>
       <label for='greetings'> {{ greetings[appLanguage] }} </label>
+      <input type='checkbox' id='family' value='family' v-model='settings.categories'>
+      <label for='family'> {{ family[appLanguage] }} </label>
       <input type='checkbox' id='presReg' value='present-regular' v-model='settings.categories'>
       <label for='presReg'> {{ verbsReg[appLanguage] }} </label>
     </div>
@@ -100,6 +102,11 @@ export default {
         es: 'Verbos (regular Español)',
         nl: 'Werkwoorden (Spaans regelmatig)'
       },
+      family: {
+        en: 'Family',
+        es: 'Familia',
+        nl: 'Familie'
+      },
       cancel: {
         en: 'Cancel',
         es: 'Cancelar',
@@ -132,7 +139,7 @@ export default {
   justify-content: space-around;
 }
 
-h3 {
+h2 {
   margin: 0 0 1em 0;
   text-align: center;
 }
@@ -153,7 +160,7 @@ h3 {
   grid-template-rows: auto auto;
 }
 
-.languages h3 {
+.languages h2 {
   grid-column: 1 / 3;
   grid-row: 1;
 }
