@@ -60,22 +60,26 @@ export default {
   },
   computed: {
     question: function () {
+      let card
       if (this.settings.from === 'en') {
-        return this.card.en
+        card = this.card.en
       } else if (this.settings.from === 'es') {
-        return this.card.es
+        card = this.card.es
       } else if (this.settings.from === 'nl') {
-        return this.card.nl
+        card = this.card.nl
       }
+      return card
     },
     answer: function () {
+      let card
       if (this.settings.to === 'en') {
-        return this.card.en
+        card = this.card.en
       } else if (this.settings.to === 'es') {
-        return this.card.es
+        card = this.card.es
       } else if (this.settings.to === 'nl') {
-        return this.card.nl
+        card = this.card.nl
       }
+      return card
     }
   },
   methods: {
