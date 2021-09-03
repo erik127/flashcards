@@ -9,11 +9,11 @@
       <h2>How to play</h2>
       <p>Let's say you leave the default languages (from English to Spanish). You will be presented with your first card.</p>
       <ol>
-        <img class='help-image' src='/static/img/flashcard-front.png'>
+        <img class='help-image' src='/img/flashcard-front.png'>
         <li>Tap settings to change languages or categories.</li>
         <li>Look at the term and think of the translation.</li>
         <li>Tap the blue button with arrow to flip the card.</li>
-        <img class='help-image' src='/static/img/flashcard-back.png'>
+        <img class='help-image' src='/img/flashcard-back.png'>
         <li>If you answered right, tap the green button with checkmark. If you answered wrong, you need to tap the red icon with a cross.</li>
         <li>At the bottom you can track your progress</li>
       </ol>
