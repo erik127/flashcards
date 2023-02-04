@@ -6,11 +6,10 @@
       </div>
 </template>
 
-<script>
-export default {
-  name: 'language-switcher',
-  props: ['appLanguage']
-}
+<script setup>
+  
+  const props = defineProps(['appLanguage'])
+
 </script>
 
 <style>
@@ -54,4 +53,3 @@ export default {
   opacity: 1;
 }
 </style>
-<style>

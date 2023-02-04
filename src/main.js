@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue'
+import App from './AppWrapper.vue'
 
-Vue.config.productionTip = false
+import './assets/styles.css'
 
 const ua = window.navigator.userAgent
 const isIE = /MSIE|Trident/.test(ua)
@@ -12,6 +12,4 @@ if (isIE) { // IE specific code
   body.classList.add('ie')
 }
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+createApp(App).mount('#app')

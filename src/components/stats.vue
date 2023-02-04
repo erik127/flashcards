@@ -2,85 +2,81 @@
   <div class="stats">
     <div :class='stackheight(stats[0])'> 
       <p> {{ stats[0] }} </p>
-      <p> {{ start[appLanguage] }} </p>
+      <p> {{ strings.start[appLanguage] }} </p>
     </div>
     <div :class='stackheight(stats[1])'>
       <p> {{ stats[1] }} </p>
-      <p> {{ wrong[appLanguage] }} </p>
+      <p> {{ strings.wrong[appLanguage] }} </p>
     </div>
     <div :class='stackheight(stats[2])'> 
       <p> {{ stats[2] }} </p>
-      <p> {{ right[appLanguage] }} </p>
+      <p> {{ strings.right[appLanguage] }} </p>
     </div>
     <div :class='stackheight(stats[3])'> 
       <p> {{ stats[3] }} </p>
-      <p> {{ done[appLanguage] }} </p>
+      <p> {{ strings.done[appLanguage] }} </p>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 
-export default {
-  name: 'stats',
-  data () {
-    return {
-      start: {
-        en: 'start',
-        es: 'inicio',
-        nl: 'start'
-      },
-      wrong: {
-        en: 'wrong',
-        es: 'error',
-        nl: 'fout'
-      },
-      right: {
-        en: 'right',
-        es: 'correct',
-        nl: 'goed'
-      },
-      done: {
-        en: 'done',
-        es: 'hecho',
-        nl: 'klaar'
-      }
-    }
-  },
-  props: ['stats', 'appLanguage'],
-  methods: {
-    stackheight: function (deck) {
-      let total = this.stats[0] + this.stats[1] + this.stats[2] + this.stats[3]
-      let factor = deck / total
-      if (factor >= 1) {
-        return 'hundred'
-      } else if (factor >= 0.9) {
-        return 'ninety'
-      } else if (factor >= 0.8) {
-        return 'eighty'
-      } else if (factor >= 0.7) {
-        return 'seventy'
-      } else if (factor >= 0.6) {
-        return 'sixty'
-      } else if (factor >= 0.5) {
-        return 'fifty'
-      } else if (factor >= 0.4) {
-        return 'fourty'
-      } else if (factor >= 0.3) {
-        return 'thirty'
-      } else if (factor >= 0.2) {
-        return 'twenty'
-      } else if (factor >= 0.1) {
-        return 'ten'
-      } else {
-        return 'zero'
-      }
+  const props = defineProps(['stats', 'appLanguage'])
+
+  const strings = {
+    start: {
+      en: 'start',
+      es: 'inicio',
+      nl: 'start'
+    },
+    wrong: {
+      en: 'wrong',
+      es: 'error',
+      nl: 'fout'
+    },
+    right: {
+      en: 'right',
+      es: 'correct',
+      nl: 'goed'
+    },
+    done: {
+      en: 'done',
+      es: 'hecho',
+      nl: 'klaar'
     }
   }
-}
+
+  function stackheight (deck) {
+    const total = props.stats[0] + props.stats[1] + props.stats[2] + props.stats[3]
+    const factor = deck / total
+    if (factor >= 1) {
+      return 'hundred'
+    } else if (factor >= 0.9) {
+      return 'ninety'
+    } else if (factor >= 0.8) {
+      return 'eighty'
+    } else if (factor >= 0.7) {
+      return 'seventy'
+    } else if (factor >= 0.6) {
+      return 'sixty'
+    } else if (factor >= 0.5) {
+      return 'fifty'
+    } else if (factor >= 0.4) {
+      return 'fourty'
+    } else if (factor >= 0.3) {
+      return 'thirty'
+    } else if (factor >= 0.2) {
+      return 'twenty'
+    } else if (factor >= 0.1) {
+      return 'ten'
+    } else {
+      return 'zero'
+    }
+  }
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style>
 .stats {
   width: 15em;

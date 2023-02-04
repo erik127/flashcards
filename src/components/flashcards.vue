@@ -49,52 +49,56 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'flashcards',
-  props: ['card', 'showcard', 'transitionIn', 'transitionOut', 'settings'],
-  data () {
-    return {
-      isAnswer: false
+<script setup>
+  import { ref, computed } from 'vue'
+
+  const props = defineProps({
+    card: Object, 
+    showcard: Boolean, 
+    transitionIn: String, 
+    transitionOut: String, 
+    settings: Object
+  })
+
+  const emit = defineEmits(['answer', 'getCard'])
+
+  const isAnswer = ref(false)
+
+  const question = computed(() => {
+    let card
+    if (props.settings.from === 'en') {
+      card = props.card.en
+    } else if (props.settings.from === 'es') {
+      card = props.card.es
+    } else if (props.settings.from === 'nl') {
+      card = props.card.nl
     }
-  },
-  computed: {
-    question: function () {
-      let card
-      if (this.settings.from === 'en') {
-        card = this.card.en
-      } else if (this.settings.from === 'es') {
-        card = this.card.es
-      } else if (this.settings.from === 'nl') {
-        card = this.card.nl
-      }
-      return card
-    },
-    answer: function () {
-      let card
-      if (this.settings.to === 'en') {
-        card = this.card.en
-      } else if (this.settings.to === 'es') {
-        card = this.card.es
-      } else if (this.settings.to === 'nl') {
-        card = this.card.nl
-      }
-      return card
+  return card
+  })
+
+  const answer = computed(() => {
+    let card
+    if (props.settings.to === 'en') {
+      card = props.card.en
+    } else if (props.settings.to === 'es') {
+      card = props.card.es
+    } else if (props.settings.to === 'nl') {
+      card = props.card.nl
     }
-  },
-  methods: {
-    flip: function () {
-      this.isAnswer = !this.isAnswer
-    },
-    processAnswer: function (reply) {
-      this.$emit('answer', reply)
-    },
-    afterLeave: function () {
-      this.flip()
-      this.$emit('getCard')
-    }
+  return card
+  })
+
+  function flip () {
+    isAnswer.value = !isAnswer.value
   }
-}
+
+  function processAnswer (reply) {
+    emit('answer', reply)
+  }
+  function afterLeave () {
+    flip()
+    emit('getCard')
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

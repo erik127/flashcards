@@ -103,19 +103,12 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'about',
-  props: ['appLanguage'],
-  data () {
-    return {
+<script setup>
+  
+  const props = defineProps(['appLanguage'])
 
-    }
-  }
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
   margin: 3em 1em;
