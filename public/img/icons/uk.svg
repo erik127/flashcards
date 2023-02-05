@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="420" height="280" version="1.0" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg">
+ <rect width="420" height="280" fill="#000096"/>
+ <g fill="#fff">
+  <rect transform="rotate(90)" y="-240" width="280" height="60"/>
+  <path d="m0 0v25l395 255h25v-30l-395-250h-25"/>
+  <path d="m0 250 390-250h30v30l-390 250h-30z"/>
+ </g>
+ <g fill="#b80000">
+  <path d="m420 280-220-140v-15l220 140z"/>
+  <path d="m400 0h20l-200 130h-20z"/>
+  <path d="m0 0 220 140v15l-220-140z"/>
+  <path d="m20 280 170-110h-20l-170 110z"/>
+ </g>
+ <g>
+  <rect y="100" width="420" height="80" fill="#fff"/>
+  <rect y="115" width="420" height="50" fill="#b80000"/>
+  <rect transform="rotate(90)" y="-230" width="280" height="40" fill="#b80000"/>
+ </g>
+</svg>
