@@ -15,8 +15,8 @@
                 <svg viewBox='0 0 20 20' class='flip' @click='flip()'>
                   <title>flip</title>
                   <circle cx='10' cy='10' r='9'/>
-                  <path d='m3 10 h13'/>
-                  <path d='m12 5 5 5 -5 5'/>
+                  <path d='m4 10 h11'/>
+                  <path d='m11 5 5 5 -5 5'/>
                 </svg>
               </div>
             </div>
@@ -32,13 +32,13 @@
                 <svg viewBox='0 0 20 20' class='wrong' @click='processAnswer("wrong")'>
                   <title>wrong</title>
                   <circle cx='10' cy='10' r='9'/>
-                  <path d='m5 5 10 10'/>
-                  <path d='m5 15 10 -10'/>
+                  <path d='m6 6 8 8'/>
+                  <path d='m6 14 8 -8'/>
                 </svg>
                 <svg viewBox='0 0 20 20' class='right' @click='processAnswer("right")'>
                   <title>right</title>
                   <circle cx='10' cy='10' r='9'/>
-                  <path d='M 4,11 9,16 15,5'/>
+                  <path d='M 5,11 9,15 14,6'/>
                 </svg>
               </div>
             </div>
@@ -140,7 +140,8 @@
   top: 0;
   left: 0;
   border-radius: 10px;
-  box-shadow:  0 0 1px 0 rgba(100,100,100,0.5), 0 1px 10px 0 rgba(0,0,0,0.15);
+  box-shadow:  0 0 0 5px #11d4ff, 0 0 0 8px #fff, 0 0 16px 0 rgb(0 0 0), 0 1px 12px 0 rgb(0 0 0 / 15%);
+
 }
 
 .front {
@@ -173,8 +174,7 @@
 .button-box path, .back-button path {
   fill: none;
   stroke: #fff;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-linecap: square;
   stroke-width: 2;
 }
 
@@ -209,12 +209,9 @@
 }
 
 .back-button circle {
-  fill: #ddd;
+  fill: #aaa;
 }
 
-.back-button path {
-  stroke: #bbb;
-}
 
 @keyframes fromDeck0 {
   from {

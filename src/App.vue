@@ -147,7 +147,6 @@ async function restartGame () {
 
 function getCard () {
   let newRound = cardselector(decks.value, counter.value, lastDeck.value)
-  console.log(decks.value, counter.value, lastDeck.value)
   if (newRound === 'end') {
     if (confirm('congratulations, you mastered it! Do you want to reshuffle the cards?')) {
       restartGame.value()
