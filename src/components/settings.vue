@@ -33,9 +33,10 @@
       <label for='family'> {{ strings.family[appLanguage] }} </label>
       <input type='checkbox' id='presReg' value='present-regular' v-model='settings.categories'>
       <label for='presReg'> {{ strings.verbsReg[appLanguage] }} </label>
-
       <input type='checkbox' id='simplePastReg' value='simple-past-regular' v-model='settings.categories'>
       <label for='simplePastReg'> {{ strings.simplePastReg[appLanguage] }} </label>
+      <input type='checkbox' id='simpleFutureReg' value='simple-future-regular' v-model='settings.categories'>
+      <label for='simpleFutureReg'> {{ strings.simpleFutureReg[appLanguage] }} </label>
 
     </div>
 
@@ -108,6 +109,11 @@
       en: 'Simple past (regular Spanish)',
       es: 'Pretérito indefinido (regular Español)',
       nl: 'Verleden tijd (Spaans regelmatig)'
+    },
+    simpleFutureReg: {
+      en: 'Simple future (regular Spanish)',
+      es: 'Futuro simple (regular Español)',
+      nl: 'Toekomende tijd (Spaans regelmatig)'
     },
     family: {
       en: 'Family',

@@ -7,7 +7,7 @@ const presentRegular = [
     lastTry: ''
   },
   {
-    en: 'You dance (singular)',
+    en: 'You dance (informal singular)',
     es: '(Tú) bailas',
     nl: 'Jij danst',
     tries: 0,
@@ -42,7 +42,7 @@ const presentRegular = [
     lastTry: ''
   },
   {
-    en: 'You dance (plural)',
+    en: 'You dance (informal plural)',
     es: '(Vosotros) bailáis',
     nl: 'Jullie dansen',
     tries: 0,
@@ -70,7 +70,7 @@ const presentRegular = [
     lastTry: ''
   },
   {
-    en: 'You run (singular)',
+    en: 'You run (informal singular)',
     es: '(Tú) corres',
     nl: 'Jij rent',
     tries: 0,
@@ -105,7 +105,7 @@ const presentRegular = [
     lastTry: ''
   },
   {
-    en: 'You run (plural)',
+    en: 'You run (informal plural)',
     es: '(Vosotros) corréis',
     nl: 'Jullie rennen',
     tries: 0,
@@ -133,7 +133,7 @@ const presentRegular = [
     lastTry: ''
   },
   {
-    en: 'You live (singular)',
+    en: 'You live (informal singular)',
     es: '(Tú) vives',
     nl: 'Jij woont',
     tries: 0,
@@ -168,7 +168,7 @@ const presentRegular = [
     lastTry: ''
   },
   {
-    en: 'You live (plural)',
+    en: 'You live (informal plural)',
     es: '(Vosotros) vivís',
     nl: 'Jullie wonen',
     tries: 0,

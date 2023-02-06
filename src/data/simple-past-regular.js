@@ -7,7 +7,7 @@ const simplePastRegular = [
     lastTry: ''
   },
   {
-    en: 'You danced (singular)',
+    en: 'You danced (informal singular)',
     es: '(Tú) bailaste',
     nl: 'Jij danste',
     tries: 0,
@@ -42,7 +42,7 @@ const simplePastRegular = [
     lastTry: ''
   },
   {
-    en: 'You danced (plural)',
+    en: 'You danced (informal plural)',
     es: '(Vosotros) bailasteis',
     nl: 'Jullie dansten',
     tries: 0,
@@ -70,7 +70,7 @@ const simplePastRegular = [
     lastTry: ''
   },
   {
-    en: 'You ate (singular)',
+    en: 'You ate (informal singular)',
     es: '(Tú) comiste',
     nl: 'Jij at',
     tries: 0,
@@ -105,7 +105,7 @@ const simplePastRegular = [
     lastTry: ''
   },
   {
-    en: 'You ate (plural)',
+    en: 'You ate (informal plural)',
     es: '(Vosotros) comisteis',
     nl: 'Jullie aten',
     tries: 0,
@@ -133,7 +133,7 @@ const simplePastRegular = [
     lastTry: ''
   },
   {
-    en: 'You lived (singular)',
+    en: 'You lived (informal singular)',
     es: '(Tú) viviste',
     nl: 'Jij woonde',
     tries: 0,
@@ -168,7 +168,7 @@ const simplePastRegular = [
     lastTry: ''
   },
   {
-    en: 'You lived (plural)',
+    en: 'You lived (informal plural)',
     es: '(Vosotros) vivisteis',
     nl: 'Jullie woonden',
     tries: 0,

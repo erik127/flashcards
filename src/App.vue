@@ -6,6 +6,7 @@ import Greetings from './data/greetings'
 import PresentRegular from './data/present-regular'
 import Family from './data/family'
 import SimplePastRegular from './data/simple-past-regular'
+import SimpleFutureRegular from './data/simple-future-regular'
 import cardselector from './components/cardselector'
 import Navbar from './components/navbar.vue'
 import Settings from './components/settings.vue'
@@ -110,6 +111,13 @@ async function restartGame () {
     }
   }
 
+  if (settings.value.categories.indexOf('simple-future-regular') > -1) {
+    let clonedSimpleFutureRegular = JSON.parse(JSON.stringify(SimpleFutureRegular))
+    for (const card of clonedSimpleFutureRegular) {
+      decks.value[0].push(card)
+    }
+  }
+
   let status = [
     {_id: 'appLanguage', data: appLanguage.value},
     {_id: 'counter', data: counter.value},
@@ -139,11 +147,12 @@ async function restartGame () {
 
 function getCard () {
   let newRound = cardselector(decks.value, counter.value, lastDeck.value)
+  console.log(decks.value, counter.value, lastDeck.value)
   if (newRound === 'end') {
     if (confirm('congratulations, you mastered it! Do you want to reshuffle the cards?')) {
       restartGame.value()
     } else {
-      alert('OK, bye, chao, doei')
+      alert('OK, gracias, thanks, dank je !')
     }
   } else {
     transitionIn.value = 'fromDeck' + newRound.deck
@@ -218,7 +227,6 @@ function changeView (newView) {
 }
 
 async function updateSettings() {
-  console.log(settings, view.value)
   try {
     let dbSettings = await db.get('settings')
     if (JSON.stringify(dbSettings.data) !== JSON.stringify(settings.value)) {
@@ -280,6 +288,7 @@ const stats = computed(() => {
           @switchLanguage='switchLanguage'
         ></intro>
       </transition>
+      
       <settings 
         v-if='view === "settings"' 
         :settings='settings' 
@@ -289,16 +298,19 @@ const stats = computed(() => {
         @restart='restartGame'
         @switchLanguage='switchLanguage'
       ></settings>
+      
       <info
         v-if='view === "about"' 
         :appLanguage='appLanguage'
         @close='view = "flashcards"'
       ></info>
+      
       <help
         v-if='view === "how to"'
         :appLanguage='appLanguage'
         @close='view = "flashcards"'
       ></help>
+      
       <flashcards
         v-if='view === "flashcards"'
         :card='card' 
@@ -309,11 +321,13 @@ const stats = computed(() => {
         @answer='answer' 
         @getCard='getCard' 
       ></flashcards>
+      
       <stats
         v-if='view === "flashcards"'
         :appLanguage='appLanguage' 
         :stats='stats' 
       ></stats>
+
     </main>
   </div>
 </template>
