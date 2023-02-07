@@ -49,7 +49,7 @@ label {
   -webkit-appearance: none;
   background: -webkit-linear-gradient(#fff, #fff);
   background: linear-gradient(#fff,#fff);
-  border: 2px solid #999;
+  border: 1px solid #666;
   border-radius: 4px;
   display: block;
   margin: 2em .5em;
@@ -59,11 +59,11 @@ label {
   max-width: 6em;
   height: 2.5em;
   cursor: pointer;
-  box-shadow: 2px 2px 6px 0 rgba(150, 150, 150, 0.2);
+  box-shadow: 2px 2px 0 0 #666;
 }
 
 .button:hover {
-  box-shadow: 2px 2px 6px 2px rgba(150, 150, 150, 0.3);
+  box-shadow: 2px 2px 0px 1px #333;  
 }
 
 .button-green {

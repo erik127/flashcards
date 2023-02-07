@@ -64,7 +64,7 @@ const simplePastRegular = {
     },
     {
       en: 'You danced (formal plural)',
-      es: '(Ustedes) bailó',
+      es: '(Ustedes) bailaron',
       nl: 'U danste (meervoud)',
       tries: 0,
       lastTry: ''

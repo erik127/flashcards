@@ -84,6 +84,7 @@
 
 .nav-button svg {
   width: 2em;
+  filter: drop-shadow(2px 2px 0 #666);
 }
 
 .background {

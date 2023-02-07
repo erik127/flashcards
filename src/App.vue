@@ -179,7 +179,7 @@ function getCard () {
   let newRound = Cardselector(decks.value, counter.value, lastDeck.value)
   if (newRound === 'end') {
     if (confirm('congratulations, you mastered it! Do you want to reshuffle the cards?')) {
-      restartGame.value()
+      restartGame()
     } else {
       alert('OK, gracias, thanks, dank je !')
     }

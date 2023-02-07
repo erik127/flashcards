@@ -134,8 +134,7 @@ h2 {
 
 .item {
   padding: 1em;
-  margin: 0 .2em;
-  box-shadow: 0 0 3px 0 rgb(0 0 0 /25%), 0 0px 5px 0 rgb(0 0 0 / 15%);
+  border: 1px solid #ccc;
   border-radius: 5px;
   margin: 1em 0.5em;
 }

@@ -119,7 +119,7 @@
 .flashcards {
   margin: 0 auto;
   position: relative;
-  transition: 0.4s;
+  transition: 0.3s;
   transform-style: preserve-3d;
   clear: both;
 }
@@ -140,8 +140,10 @@
   top: 0;
   left: 0;
   border-radius: 10px;
-  box-shadow:  0 0 0 5px #11d4ff, 0 0 0 8px #fff, 0 0 16px 0 rgb(0 0 0), 0 1px 12px 0 rgb(0 0 0 / 15%);
-
+  box-shadow: 0 0 0 4px #11d4ff, 
+              0 0 0 8px #fff, 
+              1px 1px 0px 9px #999, 
+              1px 1px 5px 8px #999;
 }
 
 .front {
@@ -258,31 +260,31 @@
 }
 
 .fromDeck0 {
-  animation: fromDeck0 .4s ease-out;
+  animation: fromDeck0 .3s ease-out;
 }
 
 .fromDeck1 {
-  animation: fromDeck1 .4s ease-in-out;
+  animation: fromDeck1 .3s ease-in-out;
 }
 
 .toDeck1 {
-  animation: fromDeck1 .4s ease-in-out reverse;
+  animation: fromDeck1 .3s ease-in-out reverse;
 }
 
 .fromDeck2 {
-  animation: fromDeck2 .4s ease-in-out;
+  animation: fromDeck2 .3s ease-in-out;
 }
 
 .toDeck2 {
-  animation: fromDeck2 .4s ease-in-out reverse;
+  animation: fromDeck2 .3s ease-in-out reverse;
 }
 
 .fromDeck3 {
-  animation: fromDeck3 .4s ease-in-out;
+  animation: fromDeck3 .3s ease-in-out;
 }
 
 .toDeck3 {
-  animation: fromDeck3 .4s ease-in-out reverse;
+  animation: fromDeck3 .3s ease-in-out reverse;
 }
 
 
