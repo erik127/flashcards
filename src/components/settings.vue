@@ -27,21 +27,17 @@
 
     <div class='item categories'>
       <h2> {{ strings.categories[appLanguage] }} </h2>
-      <input type='checkbox' id='greetings' value='greetings' v-model='settings.categories'>
-      <label for='greetings'> {{ strings.greetings[appLanguage] }} </label>
-      <input type='checkbox' id='family' value='family' v-model='settings.categories'>
-      <label for='family'> {{ strings.family[appLanguage] }} </label>
-      <input type='checkbox' id='presReg' value='present-regular' v-model='settings.categories'>
-      <label for='presReg'> {{ strings.verbsReg[appLanguage] }} </label>
-      <input type='checkbox' id='simplePastReg' value='simple-past-regular' v-model='settings.categories'>
-      <label for='simplePastReg'> {{ strings.simplePastReg[appLanguage] }} </label>
-      <input type='checkbox' id='simpleFutureReg' value='simple-future-regular' v-model='settings.categories'>
-      <label for='simpleFutureReg'> {{ strings.simpleFutureReg[appLanguage] }} </label>
-
-    </div>
+      <div v-for='category in Categories'>
+        <input type='checkbox' :id='category.id' :value='category.id' v-model='settings.categories'>
+        <label :for='category.id'> {{ category.name[appLanguage] }} </label>
+      </div>
+      <p class='alert' v-if='settings.categories.length === 0'>
+        {{ strings.selectOne[appLanguage] }}
+      </p>
+    </div>    
 
     <div class='buttons'>
-      <input type='button' class='button button-green float-right' value='OK' @click='$emit("change",settings)'>
+      <input type='button' class='button button-green float-right' value='OK' :disabled='settings.categories.length === 0' @click='$emit("change",settings)'>
       <input type='button' class='button' :value='strings.cancel[appLanguage]' @click='$emit("cancel")'>
       <input type='button' class='button' :value='strings.restart[appLanguage]' @click='$emit("restart")'>
     </div>
@@ -50,6 +46,7 @@
 
 <script setup>
   import LanguageSwitcher from './language-switcher.vue'
+  import Categories from '../data/Categories'
 
   const props = defineProps(['settings', 'appLanguage'])
   const emit = defineEmits(['switchLanguage', 'change', 'cancel', 'restart'])
@@ -95,30 +92,10 @@
       es: 'Categorías',
       nl: 'Categorieën'
     },
-    greetings: {
-      en: 'Greetings',
-      es: 'Saludos',
-      nl: 'Begroetingen'
-    },
-    verbsReg: {
-      en: 'Verbs (regular Spanish)',
-      es: 'Verbos (regular Español)',
-      nl: 'Werkwoorden (Spaans regelmatig)'
-    },
-    simplePastReg: {
-      en: 'Simple past (regular Spanish)',
-      es: 'Pretérito indefinido (regular Español)',
-      nl: 'Verleden tijd (Spaans regelmatig)'
-    },
-    simpleFutureReg: {
-      en: 'Simple future (regular Spanish)',
-      es: 'Futuro simple (regular Español)',
-      nl: 'Toekomende tijd (Spaans regelmatig)'
-    },
-    family: {
-      en: 'Family',
-      es: 'Familia',
-      nl: 'Familie'
+    selectOne: {
+      en: 'Please select at least one category',
+      es: 'Elija al menos una categoría',
+      nl: 'Selecteer minstens één categorie'
     },
     cancel: {
       en: 'Cancel',
@@ -156,11 +133,31 @@ h2 {
 }
 
 .item {
-  padding: 0.5em;
+  padding: 1em;
   margin: 0 .2em;
   box-shadow: 0 0 3px 0 rgb(0 0 0 /25%), 0 0px 5px 0 rgb(0 0 0 / 15%);
   border-radius: 5px;
   margin: 1em 0.5em;
+}
+
+.categories div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.3em;
+}
+
+.categories .alert {
+  position: absolute;
+  max-width: 100%;
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff0000;
+  padding: 0 1em;
+  transform: translateY(-1.25em);
+  line-height: 2;
+  border-radius: 5px;
+  border: 1px solid;
 }
 
 .languages {

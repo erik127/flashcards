@@ -1,13 +1,71 @@
+<template>
+  <div v-if='loaded'>
+    
+    <header>
+      <nav>
+        <navbar :appLanguage='appLanguage' :view='view' v-on:changeView='changeView'></navbar>
+      </nav>
+    </header>
+
+    <main>
+      <transition name='intro'>
+        <intro 
+          v-if='showIntro' 
+          :appLanguage='appLanguage' 
+          @close='showIntro = false' 
+          @switchLanguage='switchLanguage'
+        ></intro>
+      </transition>
+      
+      <settings 
+        v-if='view === "settings"' 
+        :settings='settings' 
+        :appLanguage='appLanguage' 
+        @change='updateSettings' 
+        @cancel='cancel' 
+        @restart='restartGame'
+        @switchLanguage='switchLanguage'
+      ></settings>
+      
+      <info
+        v-if='view === "about"' 
+        :appLanguage='appLanguage'
+        @close='view = "flashcards"'
+      ></info>
+      
+      <help
+        v-if='view === "how to"'
+        :appLanguage='appLanguage'
+        @close='view = "flashcards"'
+      ></help>
+      
+      <flashcards
+        v-if='view === "flashcards"'
+        :card='card' 
+        :showcard='showcard' 
+        :transitionIn='transitionIn' 
+        :transitionOut='transitionOut' 
+        :settings='settings'
+        @answer='answer' 
+        @getCard='getCard' 
+      ></flashcards>
+      
+      <stats
+        v-if='view === "flashcards"'
+        :appLanguage='appLanguage' 
+        :stats='stats' 
+      ></stats>
+
+    </main>
+  </div>
+</template>
+
 <script setup>
 
 import { ref, computed } from 'vue'
 
-import Greetings from './data/greetings'
-import PresentRegular from './data/present-regular'
-import Family from './data/family'
-import SimplePastRegular from './data/simple-past-regular'
-import SimpleFutureRegular from './data/simple-future-regular'
-import cardselector from './components/cardselector'
+import Categories from './data/Categories'
+import Cardselector from './components/cardselector'
 import Navbar from './components/navbar.vue'
 import Settings from './components/settings.vue'
 import Info from './components/info.vue'
@@ -82,40 +140,12 @@ async function restartGame () {
   showcard.value = false
   decks.value = [ [], [], [], [] ]
   counter.value = 0
+  
+  const selectedCategories = settings.value.categories
 
-  if (settings.value.categories.indexOf('greetings') > -1) {
-    let clonedGreetings = JSON.parse(JSON.stringify(Greetings))
-    for (const card of clonedGreetings) {
-      decks.value[0].push(card)
-    }
-  }
-
-  if (settings.value.categories.indexOf('present-regular') > -1) {
-    let clonedPresentRegular = JSON.parse(JSON.stringify(PresentRegular))
-    for (const card of clonedPresentRegular) {
-      decks.value[0].push(card)
-    }
-  }
-
-  if (settings.value.categories.indexOf('family') > -1) {
-    let clonedFamily = JSON.parse(JSON.stringify(Family))
-    for (const card of clonedFamily) {
-      decks.value[0].push(card)
-    }
-  }
-
-  if (settings.value.categories.indexOf('simple-past-regular') > -1) {
-    let clonedSimplePastRegular = JSON.parse(JSON.stringify(SimplePastRegular))
-    for (const card of clonedSimplePastRegular) {
-      decks.value[0].push(card)
-    }
-  }
-
-  if (settings.value.categories.indexOf('simple-future-regular') > -1) {
-    let clonedSimpleFutureRegular = JSON.parse(JSON.stringify(SimpleFutureRegular))
-    for (const card of clonedSimpleFutureRegular) {
-      decks.value[0].push(card)
-    }
+  for (let i = 0; i < selectedCategories.length; i++) {
+    const deck = Categories[selectedCategories[i]].cards
+    decks.value[0].push(...deck)
   }
 
   let status = [
@@ -146,7 +176,7 @@ async function restartGame () {
 }
 
 function getCard () {
-  let newRound = cardselector(decks.value, counter.value, lastDeck.value)
+  let newRound = Cardselector(decks.value, counter.value, lastDeck.value)
   if (newRound === 'end') {
     if (confirm('congratulations, you mastered it! Do you want to reshuffle the cards?')) {
       restartGame.value()
@@ -266,70 +296,7 @@ const stats = computed(() => {
   ]
 })
 
-
 </script>
-
-<template>
-  <div v-if='loaded'>
-    
-    <header>
-      <nav>
-        <navbar :appLanguage='appLanguage' :view='view' v-on:changeView='changeView'></navbar>
-      </nav>
-    </header>
-
-    <main>
-      <transition name='intro'>
-        <intro 
-          v-if='showIntro' 
-          :appLanguage='appLanguage' 
-          @close='showIntro = false' 
-          @switchLanguage='switchLanguage'
-        ></intro>
-      </transition>
-      
-      <settings 
-        v-if='view === "settings"' 
-        :settings='settings' 
-        :appLanguage='appLanguage' 
-        @change='updateSettings' 
-        @cancel='cancel' 
-        @restart='restartGame'
-        @switchLanguage='switchLanguage'
-      ></settings>
-      
-      <info
-        v-if='view === "about"' 
-        :appLanguage='appLanguage'
-        @close='view = "flashcards"'
-      ></info>
-      
-      <help
-        v-if='view === "how to"'
-        :appLanguage='appLanguage'
-        @close='view = "flashcards"'
-      ></help>
-      
-      <flashcards
-        v-if='view === "flashcards"'
-        :card='card' 
-        :showcard='showcard' 
-        :transitionIn='transitionIn' 
-        :transitionOut='transitionOut' 
-        :settings='settings'
-        @answer='answer' 
-        @getCard='getCard' 
-      ></flashcards>
-      
-      <stats
-        v-if='view === "flashcards"'
-        :appLanguage='appLanguage' 
-        :stats='stats' 
-      ></stats>
-
-    </main>
-  </div>
-</template>
 
 <style>
 #app {

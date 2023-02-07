@@ -106,52 +106,52 @@
 }
 
 .hundred {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff, 5px 5px 0px #bbb, 6px 6px 0px #11d4ff, 7px 7px 0px #bbb, 8px 8px 0px #11d4ff, 9px 9px 0px #bbb, 10px 10px 0px #11d4ff;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee, 5px 5px 0px #ccc, 6px 6px 0px #eee, 7px 7px 0px #ccc, 8px 8px 0px #eee, 9px 9px 0px #ccc, 10px 10px 0px #eee;
   transform: translateX(-10px) translateY(-10px);
 }
 
 .ninety {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff, 5px 5px 0px #bbb, 6px 6px 0px #11d4ff, 7px 7px 0px #bbb, 8px 8px 0px #11d4ff, 9px 9px 0px #bbb;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee, 5px 5px 0px #ccc, 6px 6px 0px #eee, 7px 7px 0px #ccc, 8px 8px 0px #eee, 9px 9px 0px #ccc;
   transform: translateX(-9px) translateY(-9px);
 }
 
 .eighty {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff, 5px 5px 0px #bbb, 6px 6px 0px #11d4ff, 7px 7px 0px #bbb, 8px 8px 0px #11d4ff;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee, 5px 5px 0px #ccc, 6px 6px 0px #eee, 7px 7px 0px #ccc, 8px 8px 0px #eee;
   transform: translateX(-8px) translateY(-8px);
 }
 
 .seventy {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff, 5px 5px 0px #bbb, 6px 6px 0px #11d4ff, 7px 7px 0px #bbb;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee, 5px 5px 0px #ccc, 6px 6px 0px #eee, 7px 7px 0px #ccc;
   transform: translateX(-7px) translateY(-7px);
 }
 
 .sixty {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff, 5px 5px 0px #bbb, 6px 6px 0px #11d4ff;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee, 5px 5px 0px #ccc, 6px 6px 0px #eee;
   transform: translateX(-6px) translateY(-6px);
 }
 
 .fifty {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff, 5px 5px 0px #bbb;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee, 5px 5px 0px #ccc;
   transform: translateX(-5px) translateY(-5px);
 }
 
 .fourty {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb, 4px 4px 0px #11d4ff;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc, 4px 4px 0px #eee;
   transform: translateX(-4px) translateY(-4px);
 }
 
 .thirty {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff, 3px 3px 0px #bbb;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee, 3px 3px 0px #ccc;
   transform: translateX(-3px) translateY(-3px);
 }
 
 .twenty {
-  box-shadow: 1px 1px 0px #bbb, 2px 2px 0px #11d4ff;
+  box-shadow: 1px 1px 0px #ccc, 2px 2px 0px #eee;
   transform: translateX(-0px) translateY(-0px);
 }
 
 .ten {
-  box-shadow: 1px 1px 0px #bbb;
+  box-shadow: 1px 1px 0px #ccc;
   transform: translateX(-1px) translateY(-1px);
 }
 
