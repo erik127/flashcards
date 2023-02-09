@@ -317,6 +317,10 @@ header {
   margin: 2em auto 1em;
 }
 
+main {
+  padding-bottom: 3em;
+}
+
 .intro-leave-active, intro-enter-active {
   transition: opacity .4s;
 }

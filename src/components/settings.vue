@@ -137,6 +137,7 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 1em 0.5em;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.2)
 }
 
 .categories div {

@@ -14,7 +14,7 @@
         <li>Keep stats about the percentage of cards answered wrong and right per category</li>
         <li>Create a lot more categories</li>
         <li>Add 'create your own card' functionality</li>
-        <li>Add speach recognition so you can talk to the app</li>
+        <li>Add speech recognition so you can talk to the app</li>
       </ul>
 
       <h2>Made with:</h2>

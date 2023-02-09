@@ -142,8 +142,8 @@
   border-radius: 10px;
   box-shadow: 0 0 0 4px #11d4ff, 
               0 0 0 8px #fff, 
-              1px 1px 0px 9px #999, 
-              1px 1px 5px 8px #999;
+              1px 1px 0px 9px #ccc, 
+              1px 1px 5px 9px #ccc;
 }
 
 .front {

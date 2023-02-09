@@ -84,7 +84,7 @@
 
 .nav-button svg {
   width: 2em;
-  filter: drop-shadow(2px 2px 0 #666);
+  filter: drop-shadow(2px 2px 0px #666);
 }
 
 .background {
@@ -141,12 +141,12 @@ g, path {
   fill: #fff;
 }
 
-.button:hover .active .background {
+.nav-button:hover .active .background {
   fill: #11d4ff;
 }
 
-.button:hover .active g,
-.button:hover .active path {
+.nav-button:hover .active g,
+.nav-button:hover .active path {
   stroke: #fff;
 }
 
